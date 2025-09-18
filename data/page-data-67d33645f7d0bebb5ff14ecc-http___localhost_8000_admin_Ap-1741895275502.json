@@ -1,0 +1,225 @@
+{
+  "userId": "67cf6a12d454ce786d5c246a",
+  "projectId": "67d33645f7d0bebb5ff14ecc",
+  "url": "http://localhost:8000/admin/ApplicationApprovals/",
+  "title": "Application Approvals",
+  "meta": [
+    {
+      "name": null,
+      "content": null
+    },
+    {
+      "name": "viewport",
+      "content": "width=device-width, initial-scale=1.0"
+    }
+  ],
+  "elements": [
+    "HTML",
+    "HEAD",
+    "META",
+    "META",
+    "TITLE",
+    "LINK",
+    "LINK",
+    "LINK",
+    "LINK",
+    "STYLE",
+    "STYLE",
+    "STYLE",
+    "STYLE",
+    "BODY",
+    "NAV",
+    "DIV",
+    "A",
+    "BUTTON",
+    "SPAN",
+    "DIV",
+    "UL",
+    "LI",
+    "A",
+    "LI",
+    "A",
+    "LI",
+    "A",
+    "DIV",
+    "DIV",
+    "H1",
+    "A",
+    "DIV",
+    "DIV",
+    "DIV",
+    "DIV",
+    "DIV",
+    "H5",
+    "P",
+    "I",
+    "DIV",
+    "DIV",
+    "DIV",
+    "DIV",
+    "H5",
+    "P",
+    "I",
+    "DIV",
+    "DIV",
+    "DIV",
+    "DIV",
+    "H5",
+    "P",
+    "I",
+    "DIV",
+    "DIV",
+    "DIV",
+    "DIV",
+    "H5",
+    "P",
+    "I",
+    "DIV",
+    "DIV",
+    "H3",
+    "DIV",
+    "BUTTON",
+    "I",
+    "DIV",
+    "DIV",
+    "TABLE",
+    "THEAD",
+    "TR",
+    "TH",
+    "TH",
+    "TH",
+    "TH",
+    "TH",
+    "TBODY",
+    "TR",
+    "TD",
+    "DIV",
+    "DIV",
+    "H3",
+    "DIV",
+    "UL",
+    "LI",
+    "DIV",
+    "I",
+    "SPAN",
+    "SPAN",
+    "SCRIPT",
+    "SCRIPT"
+  ],
+  "textContent": "WaterLoo\nDashboard\nApplication Approvals\nApplications\nApplication Approvals\nLogout\nPending\n\n0\n\nApproved\n\n1\n\nReturned\n\n0\n\nToday\n\n0\n\nPending Approvals\n Refresh\nID\tForm Type\tSubmitted By\tSubmission Date\tActions\nNo pending applications found.\nRecent Activity\n Approved: FERPA Authorization - Singh, Amrinder\nMar 03, 2025, 8:05 PM",
+  "interactiveElements": [
+    {
+      "tag": "A",
+      "text": "WaterLoo",
+      "id": null,
+      "class": "navbar-brand"
+    },
+    {
+      "tag": "BUTTON",
+      "text": "\n                \n            ",
+      "id": null,
+      "class": "navbar-toggler"
+    },
+    {
+      "tag": "A",
+      "text": "Dashboard",
+      "id": null,
+      "class": "nav-link "
+    },
+    {
+      "tag": "A",
+      "text": "Application Approvals",
+      "id": null,
+      "class": "nav-link active"
+    },
+    {
+      "tag": "A",
+      "text": "Applications",
+      "id": null,
+      "class": "nav-link "
+    },
+    {
+      "tag": "A",
+      "text": "Logout",
+      "id": null,
+      "class": "btn btn-danger"
+    },
+    {
+      "tag": "BUTTON",
+      "text": " Refresh",
+      "id": null,
+      "class": "btn btn-sm btn-outline-secondary"
+    }
+  ],
+  "tables": [
+    {
+      "id": "table-0",
+      "caption": "",
+      "className": "table table-striped table-hover",
+      "headers": [
+        "ID",
+        "Form Type",
+        "Submitted By",
+        "Submission Date",
+        "Actions"
+      ],
+      "rowCount": 1,
+      "columnCount": 5,
+      "sampleData": [
+        [
+          "No pending applications found."
+        ]
+      ],
+      "emptyText": null
+    }
+  ],
+  "lists": [
+    {
+      "id": "list-0",
+      "type": "ul",
+      "className": "navbar-nav",
+      "itemCount": 3,
+      "items": [
+        {
+          "text": "Dashboard",
+          "hasLinks": true,
+          "hasButtons": false,
+          "className": "nav-item"
+        },
+        {
+          "text": "Application Approvals",
+          "hasLinks": true,
+          "hasButtons": false,
+          "className": "nav-item"
+        },
+        {
+          "text": "Applications",
+          "hasLinks": true,
+          "hasButtons": false,
+          "className": "nav-item"
+        }
+      ],
+      "hasMoreItems": false,
+      "title": "",
+      "context": ""
+    },
+    {
+      "id": "list-1",
+      "type": "ul",
+      "className": "list-group list-group-flush",
+      "itemCount": 1,
+      "items": [
+        {
+          "text": "Approved:\n                                \n\n                                \n                                FERPA Authorization - Singh, Amrinder\n                            \n                            \n                                \n                                \n                                    Mar 03, 2025, 8:05 PM",
+          "hasLinks": false,
+          "hasButtons": false,
+          "className": "list-group-item d-flex justify-content-between align-items-center px-0"
+        }
+      ],
+      "hasMoreItems": false,
+      "title": "",
+      "context": ""
+    }
+  ],
+  "filename": "script-1741895237735.js"
+}

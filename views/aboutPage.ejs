@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About SpringAI</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome for icons -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-green: #3EB05B;
+            --light-green: #8FD694;
+            --dark-green: #1A7740;
+            --accent-green: #C5EBC9;
+            --trunk-brown: #706B44;
+            --white: #FFFFFF;
+            --light-gray: #F8F9FA;
+            --text-dark: #333333;
+        }
+        
+        body {
+            font-family: 'Open Sans', sans-serif;
+            background-color: var(--light-gray);
+            color: var(--text-dark);
+        }
+        
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Poppins', sans-serif;
+        }
+        
+        .page-header {
+            background: linear-gradient(135deg, var(--dark-green) 0%, var(--primary-green) 100%);
+            color: white;
+            padding: 4rem 0;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .page-header::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%23ffffff' fill-opacity='0.1' fill-rule='evenodd'/%3E%3C/svg%3E");
+            opacity: 0.3;
+        }
+        
+        .navbar {
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            background-color: var(--white);
+            padding: 0.75rem 0;
+        }
+        
+        .navbar-brand {
+            color: var(--dark-green) !important;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo-img {
+            height: 40px;
+            margin-right: 10px;
+        }
+        
+        .nav-link {
+            color: var(--text-dark) !important;
+            font-weight: 500;
+            transition: color 0.2s ease;
+        }
+        
+        .nav-link:hover {
+            color: var(--primary-green) !important;
+        }
+        
+        .nav-link.active {
+            color: var(--primary-green) !important;
+            font-weight: 600;
+        }
+        
+        .btn-primary {
+            background-color: var(--primary-green) !important;
+            border-color: var(--primary-green) !important;
+        }
+        
+        .btn-primary:hover {
+            background-color: var(--dark-green) !important;
+            border-color: var(--dark-green) !important;
+            transform: translateY(-2px);
+        }
+        
+        .btn-login {
+            padding: 0.75rem 2rem;
+            font-weight: 600;
+            border-radius: 50px;
+            box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+            transition: all 0.3s ease;
+        }
+        
+        .content-box {
+            background-color: var(--white);
+            border-radius: 0.75rem;
+            box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.05);
+            padding: 2.5rem;
+            margin-bottom: 2rem;
+            border-top: 3px solid var(--primary-green);
+        }
+        
+        .timeline {
+            position: relative;
+            padding-left: 2rem;
+        }
+        
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            height: 100%;
+            width: 4px;
+            background: var(--light-green);
+            border-radius: 4px;
+        }
+        
+        .timeline-item {
+            position: relative;
+            padding-bottom: 2rem;
+        }
+        
+        .timeline-item:last-child {
+            padding-bottom: 0;
+        }
+        
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -2.25rem;
+            top: 0.25rem;
+            height: 16px;
+            width: 16px;
+            border-radius: 50%;
+            background: var(--primary-green);
+            border: 3px solid var(--white);
+        }
+        
+        .timeline-date {
+            color: var(--primary-green);
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+        
+        .team-member {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        
+        .team-img {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 5px solid var(--accent-green);
+            margin-bottom: 1rem;
+        }
+        
+        .gradient-text {
+            background: linear-gradient(90deg, var(--dark-green), var(--primary-green));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            display: inline-block;
+        }
+        
+        .footer {
+            background-color: var(--dark-green);
+            color: rgba(255,255,255,0.8);
+            padding: 3rem 0;
+        }
+        
+        footer a.text-muted:hover {
+            color: var(--light-green) !important;
+            text-decoration: none;
+        }
+        
+        .fun-fact {
+            background-color: var(--accent-green);
+            border-radius: 0.75rem;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .fun-fact::after {
+            content: "\f5ad"; /* Tree FA icon */
+            font-family: "Font Awesome 6 Free";
+            font-weight: 900;
+            position: absolute;
+            right: -10px;
+            bottom: -15px;
+            font-size: 5rem;
+            opacity: 0.1;
+            color: var(--dark-green);
+        }
+        
+        .fun-fact h5 {
+            color: var(--dark-green);
+            margin-bottom: 0.5rem;
+        }
+        
+        .quote {
+            font-style: italic;
+            border-left: 4px solid var(--primary-green);
+            padding-left: 1rem;
+            margin: 1.5rem 0;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-light">
+        <div class="container">
+            <a class="navbar-brand" href="/">
+                <img src="/images/tree-logo.png" alt="SpringAI Logo" class="logo-img">
+                SpringAI
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/#features">Features</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Contact</a>
+                    </li>
+                    <li class="nav-item ms-lg-3">
+                        <a href="/auth/login" class="btn btn-primary">
+                            <i class="fas fa-sign-in-alt me-2"></i>Sign In
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <header class="page-header">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 mx-auto text-center">
+                    <h1 class="fw-bold mb-3">Our <span class="gradient-text">Story</span></h1>
+                    <p class="lead">How a spring break project grew into a powerful onboarding solution</p>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <section class="py-5">
+        <div class="container">
+            <div class="row">
+                <!-- About Column -->
+                <div class="col-lg-8">
+                    <!-- Our Story -->
+                    <div class="content-box">
+                        <h2 class="mb-4">The Birth of SpringAI</h2>
+                        <div class="d-flex align-items-center mb-4">
+                            <img src="/api/placeholder/100/100" alt="Amrinder Singh" class="rounded-circle me-3" style="width: 80px; height: 80px;">
+                            <div>
+                                <h5 class="mb-1">Amrinder Singh</h5>
+                                <p class="text-muted mb-0">Founder & Developer</p>
+                            </div>
+                        </div>
+                        
+                        <p class="lead mb-4">SpringAI was born during my spring break while working on an automation project. Since it was built in spring and revolves around AI-driven onboarding, the name 'Spring AI' just made sense!</p>
+                        
+                        <p>As a developer passionate about AI, automation, and building intuitive software solutions, I noticed a common problem across many web applications: poor user onboarding. New users would get lost, miss key features, and ultimately abandon otherwise great products.</p>
+                        
+                        <div class="quote">
+                            <p class="mb-0">"The best features in the world don't matter if users can't figure out how to use them. That's why I created SpringAI - to bridge the gap between complex applications and their users."</p>
+                        </div>
+                        
+                        <p>With expertise in iOS, Android, and web development, I focused on creating a solution that would work seamlessly across platforms while requiring minimal setup from developers.</p>
+                    </div>
+                    
+                    <!-- Timeline -->
+                    <div class="content-box">
+                        <h2 class="mb-4">Our Journey</h2>
+                        <div class="timeline">
+                            <div class="timeline-item">
+                                <div class="timeline-date">Spring 2024</div>
+                                <h5>The Seed Was Planted</h5>
+                                <p>During a particularly productive spring break, the first version of SpringAI was created as a personal project to solve onboarding challenges.</p>
+                            </div>
+                            <div class="timeline-item">
+                                <div class="timeline-date">Summer 2024</div>
+                                <h5>Growing Roots</h5>
+                                <p>After sharing with fellow developers and receiving enthusiastic feedback, I decided to develop it into a full-fledged product.</p>
+                            </div>
+                            <div class="timeline-item">
+                                <div class="timeline-date">Fall 2024</div>
+                                <h5>Branching Out</h5>
+                                <p>Added AI-powered analysis that automatically detects key elements in a website and suggests optimal tour paths.</p>
+                            </div>
+                            <div class="timeline-item">
+                                <div class="timeline-date">Early 2025</div>
+                                <h5>In Full Bloom</h5>
+                                <p>Official launch of SpringAI, helping developers everywhere create better onboarding experiences with minimal effort.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Sidebar -->
+                <div class="col-lg-4">
+                    <!-- Mission -->
+                    <div class="content-box">
+                        <h4 class="mb-3">Our Mission</h4>
+                        <p>To make web applications more accessible and user-friendly by providing intelligent, automated onboarding solutions that require minimal development effort.</p>
+                    </div>
+                    
+                    <!-- Fun Facts -->
+                    <div class="fun-fact">
+                        <h5><i class="fas fa-lightbulb me-2"></i>Name Origin</h5>
+                        <p class="mb-0">The name "SpringAI" has a double meaning - it was created during spring break and helps new users "spring" into action with your app!</p>
+                    </div>
+                    
+                    <div class="fun-fact">
+                        <h5><i class="fas fa-coffee me-2"></i>Coffee Count</h5>
+                        <p class="mb-0">SpringAI was built on approximately 127 cups of coffee, 3 all-nighters, and one extremely productive weekend.</p>
+                    </div>
+                    
+                    <div class="fun-fact">
+                        <h5><i class="fas fa-code me-2"></i>Code Trivia</h5>
+                        <p class="mb-0">The first version had just 42 lines of JavaScript - a fitting tribute to "The Hitchhiker's Guide to the Galaxy" and its answer to everything!</p>
+                    </div>
+                    
+                    <!-- Skills -->
+                    <div class="content-box">
+                        <h4 class="mb-3">Tech Stack</h4>
+                        <div class="mb-3">
+                            <h6>Frontend</h6>
+                            <div class="d-flex flex-wrap gap-2">
+                                <span class="badge bg-primary">React</span>
+                                <span class="badge bg-primary">JavaScript</span>
+                                <span class="badge bg-primary">Bootstrap</span>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <h6>Backend</h6>
+                            <div class="d-flex flex-wrap gap-2">
+                                <span class="badge bg-primary">Node.js</span>
+                                <span class="badge bg-primary">Express</span>
+                                <span class="badge bg-primary">MongoDB</span>
+                            </div>
+                        </div>
+                        <div>
+                            <h6>AI & ML</h6>
+                            <div class="d-flex flex-wrap gap-2">
+                                <span class="badge bg-primary">TensorFlow</span>
+                                <span class="badge bg-primary">Natural Language Processing</span>
+                                <span class="badge bg-primary">Computer Vision</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Call to Action -->
+    <section class="bg-primary text-white py-5">
+        <div class="container text-center py-3">
+            <h2 class="fw-bold mb-4">Ready to Improve Your User Onboarding?</h2>
+            <p class="lead mb-4">Join us in making web applications more accessible to everyone!</p>
+            <a href="/auth/login" class="btn btn-lg btn-light btn-login">
+                <i class="fab fa-microsoft me-2"></i>Get Started with Microsoft Login
+            </a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 mb-4 mb-lg-0">
+                    <h5 class="text-white">
+                        <img src="/images/tree-logo.png" alt="SpringAI Logo" style="height: 30px; margin-right: 10px;">
+                        SpringAI
+                    </h5>
+                    <p>A tool for creating interactive website guides.</p>
+                </div>
+                <div class="col-lg-2 mb-4 mb-lg-0">
+                    <h6 class="text-white">Links</h6>
+                    <ul class="list-unstyled">
+                        <li><a href="#" class="text-muted">About</a></li>
+                        <li><a href="/#features" class="text-muted">Features</a></li>
+                        <li><a href="#" class="text-muted">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-2 mb-4 mb-lg-0">
+                    <h6 class="text-white">Legal</h6>
+                    <ul class="list-unstyled">
+                        <li><a href="#" class="text-muted">Terms</a></li>
+                        <li><a href="#" class="text-muted">Privacy</a></li>
+                        <li><a href="#" class="text-muted">Cookies</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-4">
+                    <h6 class="text-white">Stay Connected</h6>
+                    <div class="d-flex gap-3 mb-3">
+                        <a href="#" class="text-white"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="text-white"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="text-white"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#" class="text-white"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+            </div>
+            <hr class="my-4 bg-light opacity-25">
+            <div class="row align-items-center">
+                <div class="col-md-6 text-center text-md-start">
+                    <p class="small mb-md-0">© 2025 SpringAI. All rights reserved.</p>
+                </div>
+                <div class="col-md-6 text-center text-md-end">
+                    <a href="/auth/login" class="text-white small">Sign In</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS Bundle with Popper -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

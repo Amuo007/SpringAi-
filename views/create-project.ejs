@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SpringAI - Create Project</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome for icons -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-green: #3EB05B;
+            --light-green: #8FD694;
+            --dark-green: #1A7740;
+            --accent-green: #C5EBC9;
+            --trunk-brown: #706B44;
+            --white: #FFFFFF;
+            --light-gray: #F4F6F9;
+            --text-dark: #2C3E50;
+            --text-muted: #6C757D;
+        }
+        
+        /* Static Leaf Background */
+        body {
+            background-color: var(--light-gray);
+            color: var(--text-dark);
+            font-family: 'Open Sans', sans-serif;
+            position: relative;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'%3E%3Cpath fill='%238FD694' fill-opacity='0.1' d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z'%3E%3C/path%3E%3C/svg%3E"),
+                           url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='60' viewBox='0 0 60 60'%3E%3Cpath fill='%233EB05B' fill-opacity='0.05' d='M30 30 L30 0 L0 30 Z'%3E%3C/path%3E%3C/svg%3E");
+        }
+        
+        /* Additional leaf pattern as a fixed overlay */
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            pointer-events: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='80' viewBox='0 0 80 80'%3E%3Cpath fill='%23C5EBC9' fill-opacity='0.08' d='M40 40 L40 0 L0 40 Z M40 40 L80 40 L40 80 Z'%3E%3C/path%3E%3C/svg%3E");
+        }
+        
+        h1, h2, h3, h4, h5, h6, .project-title {
+            font-family: 'Poppins', sans-serif;
+        }
+        
+        .container-fluid {
+            max-width: 1400px;
+        }
+        
+        .content-container {
+            display: flex;
+            min-height: 100vh;
+            padding: 20px;
+            margin: 0 auto;
+            border-radius: 12px;
+            background-color: var(--white);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+            position: relative;
+            z-index: 1;
+        }
+        
+        .form-section {
+            flex: 1;
+            max-width: 650px;
+            padding-right: 50px;
+        }
+        
+        .image-section {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+        
+        .close-icon {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            color: var(--text-muted);
+            font-size: 24px;
+            cursor: pointer;
+            text-decoration: none;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            transition: background-color 0.3s ease;
+        }
+        
+        .close-icon:hover {
+            background-color: rgba(0,0,0,0.05);
+            color: var(--text-dark);
+        }
+        
+        h1 {
+            font-size: 28px;
+            margin-bottom: 40px;
+            font-weight: 500;
+            color: var(--dark-green);
+        }
+        
+        .project-title {
+            font-size: 32px;
+            font-weight: 500;
+            margin-bottom: 15px;
+            color: var(--dark-green);
+        }
+        
+        .info-icon {
+            font-size: 18px;
+            color: var(--light-green);
+            margin-left: 10px;
+            vertical-align: middle;
+        }
+        
+        .form-control {
+            background-color: var(--white);
+            border: 1px solid var(--light-green);
+            border-radius: 8px;
+            padding: 12px 15px;
+            color: var(--text-dark);
+            font-size: 16px;
+            margin-bottom: 15px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+        
+        .form-control:focus {
+            box-shadow: 0 0 0 0.25rem rgba(62, 176, 91, 0.25);
+            border-color: var(--primary-green);
+        }
+        
+        .hint-text {
+            color: var(--text-muted);
+            font-size: 14px;
+            margin-top: 5px;
+            margin-bottom: 30px;
+        }
+        
+        .btn-continue {
+            background-color: var(--primary-green);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            padding: 10px 30px;
+            float: right;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-continue:hover {
+            background-color: var(--dark-green);
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        
+        .help-text {
+            margin-top: 80px;
+            color: var(--text-muted);
+        }
+        
+        .help-link {
+            color: var(--primary-green);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        
+        .help-link:hover {
+            color: var(--dark-green);
+            text-decoration: underline;
+        }
+        
+        .tree-logo {
+            height: 300px;
+            max-width: 100%;
+            transition: all 0.3s ease;
+        }
+        
+        .tree-logo:hover {
+            transform: scale(1.05);
+        }
+        
+        .logo-container {
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .logo-container::after {
+            content: "";
+            position: absolute;
+            width: 300px;
+            height: 50px;
+            bottom: -20px;
+            background: radial-gradient(ellipse at center, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0) 70%);
+            border-radius: 50%;
+            z-index: -1;
+        }
+    </style>
+</head>
+<body>
+    <!-- Main Content -->
+    <div class="container py-5">
+      <div class="content-container">
+        <!-- Form Section -->
+        <div class="form-section ps-4">
+            <a href="#" class="close-icon ms-2" title="Close" onclick="window.history.back(); return false;">
+                <i class="fas fa-times"></i>
+            </a>
+            
+            <h1 class="mt-4">Create a project</h1>
+            
+            <div class="project-title">
+                Let's start with a name for your project
+                <i class="fas fa-leaf info-icon"></i>
+            </div>
+            
+            <form action="/dashboard/create-project" method="POST">
+                <div class="form-group">
+                    <input type="text" class="form-control" name="projectName" required placeholder="Enter your project name">
+                </div>
+                <button type="submit" class="btn btn-continue">Continue</button>
+            </form>
+
+            <p id="scriptLink" style="display:none;" class="mt-3">
+                Your script URL: <a id="scriptURL" href="#" target="_blank"></a>
+            </p>
+
+            <div class="help-text">
+                <p>Project creation might take a few minutes.</p>
+                <p>By clicking "Continue," you agree to the <a href="#" class="help-link">SpringAI Terms of Service</a>.</p>
+            </div>
+        </div>
+        
+        <!-- Image Section -->
+        <div class="image-section">
+            <div class="logo-container">
+                <img src="/images/tree-logo.png" alt="SpringAI Logo" class="tree-logo">
+            </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bootstrap JS Bundle with Popper -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

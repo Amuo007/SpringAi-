@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SpringAI - Set up Your Tracking Script</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome for icons -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-green: #3EB05B;
+            --light-green: #8FD694;
+            --dark-green: #1A7740;
+            --accent-green: #C5EBC9;
+            --trunk-brown: #706B44;
+            --white: #FFFFFF;
+            --light-gray: #F4F6F9;
+            --text-dark: #2C3E50;
+            --text-muted: #6C757D;
+        }
+        
+        body {
+            background-color: var(--light-gray);
+            color: var(--text-dark);
+            font-family: 'Open Sans', sans-serif;
+        }
+        
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Poppins', sans-serif;
+        }
+        
+        .container-fluid {
+            max-width: 1400px;
+        }
+        
+        .content-container {
+            min-height: 100vh;
+            padding: 20px;
+            margin: 0 auto;
+            border-radius: 12px;
+            background-color: var(--white);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+        }
+        
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+            border-bottom: 1px solid var(--light-green);
+            margin-bottom: 30px;
+        }
+        
+        .close-icon {
+            color: var(--text-muted);
+            font-size: 24px;
+            cursor: pointer;
+            text-decoration: none;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            transition: background-color 0.3s ease;
+        }
+        
+        .close-icon:hover {
+            background-color: rgba(0,0,0,0.05);
+            color: var(--text-dark);
+        }
+        
+        h1 {
+            font-size: 24px;
+            font-weight: 500;
+            color: var(--dark-green);
+            margin: 0;
+        }
+        
+        .btn-continue {
+            background-color: var(--primary-green);
+            color: white;
+            border: none;
+            border-radius: 6px;
+            padding: 8px 16px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-continue:hover {
+            background-color: var(--dark-green);
+            color: white;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+            transform: translateY(-2px);
+        }
+        
+        .option-card {
+            border: 1px solid var(--light-green);
+            border-radius: 8px;
+            margin-bottom: 20px;
+            overflow: hidden;
+        }
+        
+        .option-header {
+            padding: 16px 20px;
+            background-color: var(--accent-green);
+            border-bottom: 1px solid var(--light-green);
+            font-weight: 500;
+            font-size: 18px;
+            color: var(--dark-green);
+        }
+        
+        .option-content {
+            padding: 20px;
+        }
+        
+        .recommended-badge {
+            background-color: #e6f4ea;
+            color: var(--primary-green);
+            font-size: 12px;
+            font-weight: 500;
+            padding: 4px 8px;
+            border-radius: 4px;
+            margin-left: 10px;
+            text-transform: uppercase;
+        }
+        
+        .code-block {
+            background-color: #f8f9fa;
+            border: 1px solid var(--light-green);
+            border-radius: 8px;
+            padding: 15px;
+            margin: 15px 0;
+            position: relative;
+            font-family: monospace;
+            font-size: 14px;
+            line-height: 1.5;
+            white-space: pre;
+            overflow-x: auto;
+        }
+        
+        .copy-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background-color: transparent;
+            border: none;
+            color: var(--text-muted);
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        
+        .copy-btn:hover {
+            color: var(--primary-green);
+        }
+        
+        .info-box {
+            background-color: #e6f4ea;
+            border-radius: 8px;
+            padding: 16px;
+            margin: 20px 0;
+            display: flex;
+            align-items: flex-start;
+            border-left: 4px solid var(--primary-green);
+        }
+        
+        .info-icon {
+            color: var(--primary-green);
+            font-size: 20px;
+            margin-right: 15px;
+            margin-top: 2px;
+        }
+        
+        .info-content {
+            flex: 1;
+        }
+        
+        .warning-box {
+            background-color: #fff8e6;
+            border-radius: 8px;
+            border-left: 4px solid #fbbc04;
+            padding: 16px;
+            margin: 20px 0;
+            display: flex;
+            align-items: flex-start;
+        }
+        
+        .warning-icon {
+            color: #fbbc04;
+            font-size: 20px;
+            margin-right: 15px;
+            margin-top: 2px;
+        }
+        
+        .warning-content {
+            flex: 1;
+        }
+        
+        .link-green {
+            color: var(--primary-green);
+            text-decoration: none;
+            transition: color 0.2s ease;
+        }
+        
+        .link-green:hover {
+            text-decoration: underline;
+            color: var(--dark-green);
+        }
+        
+        .btn-get-started {
+            background-color: var(--primary-green);
+            color: white;
+            border: none;
+            border-radius: 4px;
+            padding: 8px 16px;
+            font-weight: 500;
+            float: right;
+        }
+        
+        .btn-get-started:hover {
+            background-color: var(--dark-green);
+            color: white;
+        }
+        
+        .show-more {
+            color: var(--primary-green);
+            text-decoration: none;
+            font-weight: 500;
+            cursor: pointer;
+            display: inline-block;
+            margin-top: 20px;
+            transition: all 0.2s ease;
+        }
+        
+        .show-more:hover {
+            text-decoration: underline;
+            color: var(--dark-green);
+        }
+        
+        .email-btn {
+            background-color: white;
+            color: var(--text-dark);
+            border: 1px solid var(--light-green);
+            border-radius: 4px;
+            padding: 8px 16px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+        
+        .email-btn:hover {
+            background-color: var(--accent-green);
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        h3 {
+            color: var(--dark-green);
+        }
+        
+        h4 {
+            color: var(--dark-green);
+        }
+        
+        .page-header-content {
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo-img {
+            height: 28px;
+            margin-right: 12px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container py-4">
+        <div class="content-container">
+            <!-- Header -->
+            <div class="header">
+                <div class="d-flex align-items-center">
+                    <a href="#" class="close-icon me-3" title="Close" onclick="window.history.back(); return false;">
+                        <i class="fas fa-times"></i>
+                    </a>
+                    <div class="page-header-content">
+                        <img src="/images/tree-logo.png" alt="SpringAI Logo" class="logo-img">
+                        <h1>Set up your tracking script</h1>
+                    </div>
+                </div>
+                <a href="/project/<%= projectId %>" class="btn btn-continue">Continue</a>
+            </div>
+            
+            <!-- Main Content -->
+            <div class="option-card">
+                <div class="option-header">
+                    Choose how to set up your SpringAI tracking script
+                </div>
+                
+                <!-- Manual Installation Option -->
+                <div class="option-content">
+                    <div class="d-flex align-items-center mb-3">
+                        <h3 class="mb-0">Install manually</h3>
+                        <span class="recommended-badge">Recommended</span>
+                    </div>
+                    
+                    <p>Below is the tracking script for your project. Copy and paste it in the code of every page of your website, immediately after the &lt;head&gt; element. Don't add more than one tracking script to each page.</p>
+                    
+                    <div class="code-block">
+                        <code id="scriptCode">&lt;script src="http://localhost:3000/scripts/<%= scriptFileName %>" async&gt;&lt;/script&gt;</code>
+                        <button class="copy-btn" title="Copy to clipboard" onclick="copyToClipboard()">
+                            <i class="far fa-copy"></i>
+                        </button>
+                    </div>
+                    
+                    <div class="info-box mt-4">
+                        <i class="fas fa-leaf info-icon"></i>
+                        <div class="info-content">
+                            <p class="mb-0">This script will automatically track user interactions and page data, which you can view in your SpringAI dashboard.</p>
+                        </div>
+                    </div>
+                    
+                    <h4 class="mt-4 mb-3">Need more advanced integration?</h4>
+                    <p>For additional features including multiple script management and enterprise workflows, you can use our API-based integration method.</p>
+                    <a href="#" class="link-green">Learn more about advanced integration options</a>
+                    
+                    <a class="show-more">Show more options</a>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+
+    <!-- Bootstrap JS Bundle with Popper -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Copy to clipboard functionality
+        function copyToClipboard() {
+            const codeBlock = document.querySelector('.code-block code');
+            const textToCopy = codeBlock.textContent.trim();
+            
+            navigator.clipboard.writeText(textToCopy)
+                .then(() => {
+                    // Change button icon temporarily to show success
+                    const icon = document.querySelector('.copy-btn i');
+                    icon.classList.remove('fa-copy');
+                    icon.classList.add('fa-check');
+                    
+                    setTimeout(() => {
+                        icon.classList.remove('fa-check');
+                        icon.classList.add('fa-copy');
+                    }, 2000);
+                })
+                .catch(err => {
+                    console.error('Could not copy text: ', err);
+                });
+        }
+        
+        // Add event listener to copy button
+        document.querySelector('.copy-btn').addEventListener('click', copyToClipboard);
+    </script>
+</body>
+</html>

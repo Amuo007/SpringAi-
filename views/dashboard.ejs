@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SpringAI Dashboard</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome for icons -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-green: #3EB05B;
+            --light-green: #8FD694;
+            --dark-green: #1A7740;
+            --accent-green: #C5EBC9;
+            --trunk-brown: #706B44;
+            --white: #FFFFFF;
+            --light-gray: #F4F6F9;
+            --text-dark: #2C3E50;
+            --text-muted: #6C757D;
+        }
+        
+        body {
+            background-color: var(--light-gray);
+            color: var(--text-dark);
+            font-family: 'Open Sans', sans-serif;
+            position: relative;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+        
+        /* Floating Leaves */
+        .floating-leaves {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+            overflow: hidden;
+        }
+        
+        .floating-leaf {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background-color: var(--accent-green);
+            border-radius: 50% 0 50% 50%;
+            transform: rotate(45deg);
+            opacity: 0.4;
+            z-index: -1;
+            filter: blur(0.5px);
+        }
+        
+        .floating-leaf:nth-child(even) {
+            border-radius: 50% 50% 0 50%;
+            transform: rotate(135deg);
+        }
+        
+        .floating-leaf:nth-child(3n) {
+            background-color: var(--light-green);
+            opacity: 0.3;
+        }
+        
+        .floating-leaf:nth-child(5n) {
+            filter: brightness(0.9);
+            width: 15px;
+            height: 15px;
+        }
+        
+        .floating-leaf:nth-child(7n) {
+            width: 10px;
+            height: 10px;
+            opacity: 0.25;
+        }
+        
+        @keyframes float-leaf {
+            0% {
+                transform: translateY(-5vh) rotate(45deg) translateX(0);
+                opacity: 0;
+            }
+            10% {
+                opacity: 0.4;
+            }
+            50% {
+                transform: translateY(50vh) rotate(180deg) translateX(15px);
+            }
+            90% {
+                opacity: 0.3;
+            }
+            100% {
+                transform: translateY(105vh) rotate(360deg) translateX(-15px);
+                opacity: 0;
+            }
+        }
+        
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Poppins', sans-serif;
+        }
+        
+        .navbar {
+            background-color: var(--white);
+            border-bottom: 1px solid var(--light-green);
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+            position: relative;
+            z-index: 10;
+        }
+        
+        .card {
+            background-color: var(--white);
+            border: 1px solid var(--light-green);
+            border-radius: 12px;
+            height: 180px;
+            margin-bottom: 16px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            cursor: pointer;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .card:hover {
+            background-color: var(--accent-green);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+        
+        .create-card {
+            border: 2px solid transparent;
+            background: linear-gradient(to right, var(--white), var(--white)) padding-box,
+                        linear-gradient(to right, var(--primary-green), var(--dark-green)) border-box;
+        }
+        
+        .create-card:hover {
+            background-color: var(--accent-green);
+        }
+        
+        .card-body {
+            padding: 16px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            height: 100%;
+        }
+        
+        .card-title {
+            color: var(--dark-green);
+            font-size: 16px;
+            margin-bottom: 4px;
+            font-weight: 600;
+        }
+        
+        .card-text {
+            color: var(--text-muted);
+            font-size: 14px;
+        }
+        
+        .create-card .text-center {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
+        }
+        
+        .platform-icon {
+            color: var(--primary-green);
+            margin-top: auto;
+            display: flex;
+            justify-content: flex-start;
+        }
+        
+        .navbar-brand {
+            color: var(--dark-green) !important;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo-img {
+            height: 36px;
+            margin-right: 10px;
+        }
+        
+        .btn-outline-primary {
+            color: var(--primary-green);
+            border-color: var(--primary-green);
+        }
+        
+        .btn-outline-primary:hover {
+            background-color: var(--primary-green);
+            color: var(--white);
+        }
+        
+        .user-avatar {
+            background-color: var(--primary-green) !important;
+            color: white;
+            font-weight: 600;
+        }
+        
+        .card-link {
+            text-decoration: none;
+            color: inherit;
+            display: block;
+            height: 100%;
+        }
+        
+        .card-link:hover {
+            color: inherit;
+        }
+        
+        .empty-projects {
+            text-align: center;
+            padding: 50px 20px;
+            color: var(--text-muted);
+            background-color: var(--white);
+            border: 1px solid var(--light-green);
+            border-radius: 12px;
+            margin-top: 20px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .text-primary {
+            color: var(--primary-green) !important;
+        }
+        
+        .page-title {
+            color: var(--dark-green);
+            font-weight: 600;
+        }
+        
+        .dropdown-menu {
+            border: 1px solid var(--light-green);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+        
+        .dropdown-item:hover {
+            background-color: var(--accent-green);
+            color: var(--dark-green);
+        }
+        
+        .container {
+            position: relative;
+            z-index: 1;
+        }
+    </style>
+</head>
+<body>
+    <!-- Floating Leaves Background -->
+    <div class="floating-leaves"></div>
+    
+    <!-- Header -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-white py-3 border-bottom">
+        <div class="container-fluid">
+            <button class="navbar-toggler d-md-none collapsed me-2" type="button" data-bs-toggle="collapse" data-bs-target=".sidebar">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <a class="navbar-brand d-flex align-items-center" href="#">
+                <img src="/images/tree-logo.png" alt="SpringAI Logo" class="logo-img">
+                SpringAI
+            </a>
+            <div class="d-flex align-items-center ms-auto">
+                <div class="dropdown">
+                    <a href="#" class="d-flex align-items-center text-dark text-decoration-none dropdown-toggle" id="dropdownUser" data-bs-toggle="dropdown" aria-expanded="false">
+                        <div class="user-avatar d-flex align-items-center justify-content-center" style="width: 36px; height: 36px; border-radius: 8px;">
+                            <span><%= user.name.split(" ")[1] ? user.name.split(" ")[1].charAt(0) : '' %><%= user.name.split(" ")[0].charAt(0) %></span>
+                        </div>
+                        <span class="d-none d-sm-inline ms-2"><%= user.name %></span>
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-end text-small shadow" aria-labelledby="dropdownUser">
+                        <li><a class="dropdown-item" href="/auth/logout">Logout</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </nav>
+    
+    <!-- Main Content -->
+    <div class="container mt-4">
+        <h1 class="mb-4 page-title">Your projects</h1>
+        
+        <!-- Projects Grid -->
+        <div class="row g-4">
+            <!-- Create Project Card - Always show this -->
+            <div class="col-md-6 col-lg-4">
+                <a href="dashboard/create-project" class="card-link">
+                    <div class="card create-card">
+                        <div class="card-body text-center">
+                            <div>
+                                <i class="fas fa-plus text-primary fs-4 mb-2"></i>
+                                <p class="text-primary mb-0">Create a project</p>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            
+            <!-- Dynamically generated Project Cards from database -->
+            <% if (projects && projects.length > 0) { %>
+                <% projects.forEach(function(project) { %>
+                    <div class="col-md-6 col-lg-4">
+                        <a href="/project/<%= project._id %>" class="card-link">
+                            <div class="card">
+                                <div class="card-body">
+                                    <div>
+                                        <h5 class="card-title"><%= project.name %></h5>
+                                        <p class="card-text">Created: <%= new Date(project.createdAt).toLocaleDateString() %></p>
+                                    </div>
+                                    <div class="platform-icon">
+                                        <i class="fas fa-seedling"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                <% }); %>
+            <% } else if (projects && projects.length === 0) { %>
+                <!-- Show message if no projects exist yet -->
+                <div class="col-12">
+                    <div class="empty-projects">
+                        <i class="fas fa-seedling fs-1 mb-3" style="color: var(--light-green);"></i>
+                        <h4 style="color: var(--dark-green);">No projects yet</h4>
+                        <p>Click "Create a project" to get started with your first project.</p>
+                    </div>
+                </div>
+            <% } %>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS Bundle with Popper -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- Floating Leaves Script -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const leavesContainer = document.querySelector('.floating-leaves');
+            
+            // Create initial leaves
+            for (let i = 0; i < 30; i++) {
+                createLeaf();
+            }
+            
+            function createLeaf() {
+                const leaf = document.createElement('div');
+                leaf.classList.add('floating-leaf');
+                
+                // Random position
+                leaf.style.left = Math.random() * 100 + 'vw';
+                leaf.style.top = -30 + 'px';
+                
+                // Some random variations
+                if (Math.random() > 0.5) {
+                    leaf.style.filter = `hue-rotate(${Math.random() * 20}deg)`;
+                }
+                
+                // Random animation duration and delay
+                const duration = Math.random() * 15 + 20; // 20-35 seconds
+                const delay = Math.random() * 15; // 0-15 seconds delay
+                leaf.style.animation = `float-leaf ${duration}s linear ${delay}s forwards`;
+                
+                leavesContainer.appendChild(leaf);
+                
+                // Remove leaf after animation ends and create a new one
+                setTimeout(() => {
+                    leaf.remove();
+                    createLeaf();
+                }, (duration + delay) * 1000);
+            }
+            
+            // Add click event to cards to navigate to their respective URLs
+            const cardLinks = document.querySelectorAll('.card-link');
+            
+            cardLinks.forEach(link => {
+                // This allows the entire card to be clickable
+                link.addEventListener('click', function(e) {
+                    // Prevent default only if the clicked element is not already an anchor or button
+                    if (!e.target.closest('a:not(.card-link)') && !e.target.closest('button')) {
+                        window.location.href = this.getAttribute('href');
+                    }
+                });
+            });
+        });
+    </script>
+    <script src="http://localhost:3000/scripts/script-1741905147816.js" async></script>
+</body>
+</html>

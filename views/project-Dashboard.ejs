@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SpringAI Project Dashboard</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome for icons -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-green: #3EB05B;
+            --light-green: #8FD694;
+            --dark-green: #1A7740;
+            --accent-green: #C5EBC9;
+            --trunk-brown: #706B44;
+            --white: #FFFFFF;
+            --light-gray: #F4F6F9;
+            --text-dark: #2C3E50;
+            --text-muted: #6C757D;
+        }
+        
+        body {
+            background-color: var(--light-gray);
+            color: var(--text-dark);
+            font-family: 'Open Sans', sans-serif;
+        }
+        
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Poppins', sans-serif;
+        }
+        
+        .container-fluid {
+            max-width: 1400px;
+        }
+        
+        .content-container {
+            min-height: 100vh;
+            padding: 20px;
+            margin: 0 auto;
+            border-radius: 12px;
+            background-color: var(--white);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+        }
+        
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+            border-bottom: 1px solid var(--light-green);
+            margin-bottom: 30px;
+        }
+        
+        .project-title {
+            font-size: 24px;
+            font-weight: 500;
+            color: var(--dark-green);
+            margin: 0;
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo-img {
+            height: 30px;
+            margin-right: 12px;
+        }
+        
+        .btn-primary {
+            background-color: var(--primary-green);
+            color: white;
+            border: none;
+            border-radius: 4px;
+            padding: 8px 16px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-primary:hover {
+            background-color: var(--dark-green);
+            color: white;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+            transform: translateY(-2px);
+        }
+        
+        .btn-secondary {
+            background-color: white;
+            color: var(--text-dark);
+            border: 1px solid var(--light-green);
+            border-radius: 4px;
+            padding: 8px 16px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-secondary:hover {
+            background-color: var(--accent-green);
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            transform: translateY(-2px);
+        }
+        
+        .overview-card {
+            border: 1px solid var(--light-green);
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+            background-color: var(--white);
+        }
+        
+        .card-title {
+            font-size: 18px;
+            font-weight: 500;
+            margin-bottom: 15px;
+            color: var(--dark-green);
+        }
+        
+        .stats-box {
+            background-color: var(--accent-green);
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+        
+        .stats-number {
+            font-size: 24px;
+            font-weight: 600;
+            color: var(--dark-green);
+            margin-bottom: 5px;
+        }
+        
+        .stats-label {
+            color: var(--text-dark);
+            font-size: 14px;
+        }
+        
+        .table-container {
+            background-color: var(--white);
+            border-radius: 8px;
+            border: 1px solid var(--light-green);
+            margin-bottom: 20px;
+            overflow: hidden;
+        }
+        
+        .table {
+            margin-bottom: 0;
+        }
+        
+        .table th {
+            background-color: var(--accent-green);
+            font-weight: 500;
+            color: var(--dark-green);
+            border-bottom: 1px solid var(--light-green);
+        }
+        
+        .table td {
+            vertical-align: middle;
+            color: var(--text-dark);
+            border-bottom: 1px solid var(--light-green);
+        }
+        
+        .page-url {
+            max-width: 300px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+        
+        .empty-state {
+            text-align: center;
+            padding: 50px 20px;
+            color: var(--text-muted);
+        }
+        
+        .empty-state-icon {
+            font-size: 48px;
+            color: var(--light-green);
+            margin-bottom: 20px;
+        }
+        
+        .info-box {
+            background-color: #e6f4ea;
+            border-radius: 8px;
+            padding: 16px;
+            margin: 20px 0;
+            display: flex;
+            align-items: flex-start;
+            border-left: 4px solid var(--primary-green);
+        }
+        
+        .info-icon {
+            color: var(--primary-green);
+            font-size: 20px;
+            margin-right: 15px;
+            margin-top: 2px;
+        }
+        
+        .info-content {
+            flex: 1;
+        }
+        
+        .link-green {
+            color: var(--primary-green);
+            text-decoration: none;
+        }
+        
+        .link-green:hover {
+            text-decoration: underline;
+            color: var(--dark-green);
+        }
+        
+        .badge-status {
+            padding: 5px 10px;
+            border-radius: 12px;
+            font-weight: 500;
+            font-size: 12px;
+        }
+        
+        .badge-active {
+            background-color: #e6f4ea;
+            color: var(--primary-green);
+        }
+        
+        .badge-pending {
+            background-color: #fff8e6;
+            color: #fbbc04;
+        }
+        
+        .nav-tabs {
+            border-bottom: 1px solid var(--light-green);
+            margin-bottom: 20px;
+        }
+        
+        .nav-tabs .nav-link {
+            color: var(--text-muted);
+            border: none;
+            padding: 10px 16px;
+            font-weight: 500;
+        }
+        
+        .nav-tabs .nav-link:hover {
+            color: var(--primary-green);
+            border-bottom: 2px solid var(--light-green);
+        }
+        
+        .nav-tabs .nav-link.active {
+            color: var(--primary-green);
+            background-color: transparent;
+            border-bottom: 2px solid var(--primary-green);
+        }
+        
+        .user-avatar {
+            background-color: var(--primary-green);
+            color: white;
+            font-weight: 600;
+        }
+        
+        .dropdown-menu {
+            border: 1px solid var(--light-green);
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        
+        .dropdown-item:hover {
+            background-color: var(--accent-green);
+            color: var(--dark-green);
+        }
+        
+        .dropdown-divider {
+            border-top: 1px solid var(--light-green);
+        }
+        
+        .bg-success {
+            background-color: var(--primary-green) !important;
+        }
+        
+        .btn-sm {
+            padding: 0.25rem 0.5rem;
+            font-size: 0.875rem;
+            border-radius: 0.2rem;
+        }
+        
+        code {
+            background-color: var(--light-gray);
+            color: var(--dark-green);
+            padding: 2px 4px;
+            border-radius: 4px;
+        }
+        
+        .modal-content {
+            border-radius: 8px;
+            border: 1px solid var(--light-green);
+        }
+        
+        .modal-header {
+            border-bottom: 1px solid var(--light-green);
+        }
+        
+        .modal-footer {
+            border-top: 1px solid var(--light-green);
+        }
+        
+        .code-block {
+            background-color: var(--light-gray);
+            border: 1px solid var(--light-green);
+            border-radius: 8px;
+        }
+        
+        .btn-outline-secondary {
+            color: var(--text-muted);
+            border-color: var(--light-green);
+        }
+        
+        .btn-outline-secondary:hover {
+            background-color: var(--accent-green);
+            color: var(--dark-green);
+            border-color: var(--primary-green);
+        }
+        
+        .btn-success {
+            background-color: var(--primary-green);
+            border-color: var(--primary-green);
+        }
+        
+        .btn-outline-secondary.btn-success {
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <div class="container-fluid py-4">
+        <div class="content-container">
+            <!-- Header -->
+            <div class="header">
+                <div class="d-flex align-items-center">
+                    <h1 class="project-title">
+                        <img src="/images/tree-logo.png" alt="SpringAI Logo" class="logo-img">
+                        Project <%= projectName.toUpperCase() %>
+                    </h1>
+                </div>
+                <div class="d-flex align-items-center">
+                    <button class="btn btn-secondary me-3">
+                        <i class="fas fa-cog me-1"></i> Settings
+                    </button>
+                    <div class="dropdown">
+                        <button class="btn btn-light rounded-circle d-flex align-items-center justify-content-center me-2" style="width: 40px; height: 40px; background-color: var(--primary-green); color: white;" id="userDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                            <%= userInitials %>
+                        </button>
+                        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
+                            <li><a class="dropdown-item" href="/dashboard">Dashboard</a></li>
+                            <li><a class="dropdown-item" href="/settings">Account Settings</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="/auth/logout">Logout</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Tabs Navigation -->
+            <ul class="nav nav-tabs">
+                <li class="nav-item">
+                    <a class="nav-link active" href="#">Overview</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Pages</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Data</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Script</a>
+                </li>
+            </ul>
+            
+            <!-- Main Content -->
+            <div class="row">
+                <!-- Stats Overview -->
+                <div class="col-md-4">
+                    <div class="overview-card">
+                        <h2 class="card-title">Project Overview</h2>
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="stats-box">
+                                    <div class="stats-number" id="totalPages"><%= trackedPages ? trackedPages.length : 0 %></div>
+                                    <div class="stats-label">Tracked Pages</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="info-box mt-3">
+                            <div class="info-icon">
+                                <i class="fas fa-leaf"></i>
+                            </div>
+                            <div class="info-content">
+                                <p class="mb-0">Your script is actively collecting data. <a href="#" class="link-green">View script details</a></p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Script Info -->
+                    <div class="overview-card">
+                        <h2 class="card-title">Script Information</h2>
+                        <p><strong>Script File:</strong> <span id="scriptFileName"><%= scriptFileName %></span></p>
+                        <p><strong>Created:</strong> <span id="createdDate"><%= createdAt %></span></p>
+                        <div class="d-grid">
+                            <button class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#installationCodeModal">
+                                <i class="fas fa-code me-1"></i> View Installation Code
+                              </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Pages Table -->
+                <div class="col-md-8">
+                    <div class="overview-card">
+                        <div class="mb-3">
+                            <h2 class="card-title mb-0">Tracked Pages</h2>
+                        </div>
+                        
+                        <% if (trackedPages && trackedPages.length > 0) { %>
+                            <!-- Show existing table when there is data -->
+                            <div class="table-container">
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th>URL</th>
+                                            <th>Status</th>
+                                            <th>Script</th> 
+                                            <th>Actions</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="pagesTableBody">
+                                        <% trackedPages.forEach(function(page) { %>
+                                            <tr>
+                                                <td class="page-url"><%= page.url %></td>
+                                                <td><span class="badge-status badge-active">Active</span></td>
+                                                <td>
+                                                    <% if (page.llmScriptFileName) { %>
+                                                        <span class="badge bg-success">Generated</span>
+                                                    <% } else { %>
+                                                        <span class="badge bg-secondary">Not Generated</span>
+                                                    <% } %>
+                                                </td>
+                                                <td>
+                                                    <a href="/project/<%= projectId %>/page/<%= page._id %>" class="btn btn-sm btn-secondary">
+                                                        <i class="fas fa-eye"></i> View Details
+                                                    </a>
+                                                </td>
+                                            </tr>
+                                        <% }); %>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <% } else { %>
+                            <!-- Show empty state when no data -->
+                            <div class="empty-state">
+                                <div class="empty-state-icon">
+                                    <i class="fas fa-seedling"></i>
+                                </div>
+                                <h3 style="color: var(--dark-green);">No pages tracked yet</h3>
+                                <p>To start collecting data, add your tracking script to your website pages and visit them.</p>
+                                <p>It may take a few minutes for data to appear after visiting your pages.</p>
+                                <button class="btn btn-primary mt-3" data-bs-toggle="modal" data-bs-target="#installationCodeModal">
+                                    <i class="fas fa-code me-1"></i> View Installation Code
+                                </button>
+                            </div>
+                        <% } %>
+                        
+                        <div class="mt-3">
+                            <p class="mb-0">Showing all tracked pages</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Data Preview Section -->
+                    <div class="overview-card">
+                        <h2 class="card-title">Data Preview</h2>
+                        <p>This is a summary of the most recent data collected from your tracked pages.</p>
+                        
+                        <div class="d-flex justify-content-center">
+                            <button class="btn btn-primary me-2">
+                                <i class="fas fa-download me-1"></i> Export Data
+                            </button>
+                            <button class="btn btn-secondary">
+                                <i class="fas fa-chart-line me-1"></i> View Analytics
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Installation Code Modal -->
+    <div class="modal fade" id="installationCodeModal" tabindex="-1" aria-labelledby="installationCodeModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="installationCodeModalLabel">
+                        <i class="fas fa-leaf me-2" style="color: var(--primary-green);"></i>
+                        Installation Code
+                    </h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p>Copy and paste this code in the <code>&lt;head&gt;</code> section of your website:</p>
+                    <div class="code-block position-relative bg-light p-3 rounded">
+                        <pre class="mb-0"><code id="scriptCode">&lt;script src="http://localhost:3000/scripts/<%= scriptFileName %>" async&gt;&lt;/script&gt;</code></pre>
+                        <button class="copy-btn position-absolute top-0 end-0 m-2 btn btn-sm btn-outline-secondary" id="copyBtn" title="Copy to clipboard">
+                            <i class="far fa-copy"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS Bundle with Popper -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Add this to handle the copy functionality
+            document.getElementById('copyBtn').addEventListener('click', function() {
+                const codeText = document.getElementById('scriptCode').textContent;
+                navigator.clipboard.writeText(codeText)
+                    .then(() => {
+                        // Change button icon temporarily to show success
+                        const copyBtn = this;
+                        const icon = copyBtn.querySelector('i');
+                        copyBtn.innerHTML = '<i class="fas fa-check"></i> Copied!';
+                        copyBtn.classList.remove('btn-outline-secondary');
+                        copyBtn.classList.add('btn-success');
+                        
+                        setTimeout(() => {
+                            copyBtn.innerHTML = '<i class="far fa-copy"></i>';
+                            copyBtn.classList.remove('btn-success');
+                            copyBtn.classList.add('btn-outline-secondary');
+                        }, 2000);
+                    })
+                    .catch(err => {
+                        console.error('Could not copy text: ', err);
+                    });
+            });
+            
+            // You can add JavaScript here to dynamically update the page with data from your backend
+            // For example, fetching the PageData for this project and populating the table
+        });
+        
+        function viewPageData(pageId) {
+            // Navigate to page detail view
+            window.location.href = `/project/<%= projectId %>/page/${pageId}`;
+        }
+    </script>
+    <script src="http://localhost:3000/scripts/script-1741905147816.js" async></script>
+</body>
+</html>

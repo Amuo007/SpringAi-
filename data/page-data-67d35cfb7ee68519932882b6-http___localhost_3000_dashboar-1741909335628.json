@@ -1,0 +1,261 @@
+{
+  "userId": "67cf6a12d454ce786d5c246a",
+  "projectId": "67d35cfb7ee68519932882b6",
+  "url": "http://localhost:3000/dashboard#",
+  "title": "SpringAI Dashboard",
+  "meta": [
+    {
+      "name": null,
+      "content": null
+    },
+    {
+      "name": "viewport",
+      "content": "width=device-width, initial-scale=1.0"
+    }
+  ],
+  "elements": [
+    "HTML",
+    "HEAD",
+    "META",
+    "META",
+    "TITLE",
+    "LINK",
+    "LINK",
+    "LINK",
+    "STYLE",
+    "BODY",
+    "DIV",
+    "NAV",
+    "DIV",
+    "BUTTON",
+    "SPAN",
+    "A",
+    "IMG",
+    "DIV",
+    "DIV",
+    "A",
+    "DIV",
+    "SPAN",
+    "SPAN",
+    "UL",
+    "LI",
+    "A",
+    "DIV",
+    "H1",
+    "DIV",
+    "DIV",
+    "A",
+    "DIV",
+    "DIV",
+    "DIV",
+    "I",
+    "P",
+    "DIV",
+    "A",
+    "DIV",
+    "DIV",
+    "DIV",
+    "H5",
+    "P",
+    "DIV",
+    "I",
+    "DIV",
+    "A",
+    "DIV",
+    "DIV",
+    "DIV",
+    "H5",
+    "P",
+    "DIV",
+    "I",
+    "DIV",
+    "A",
+    "DIV",
+    "DIV",
+    "DIV",
+    "H5",
+    "P",
+    "DIV",
+    "I",
+    "DIV",
+    "A",
+    "DIV",
+    "DIV",
+    "DIV",
+    "H5",
+    "P",
+    "DIV",
+    "I",
+    "DIV",
+    "A",
+    "DIV",
+    "DIV",
+    "DIV",
+    "H5",
+    "P",
+    "DIV",
+    "I",
+    "DIV",
+    "A",
+    "DIV",
+    "DIV",
+    "DIV",
+    "H5",
+    "P",
+    "DIV",
+    "I",
+    "DIV",
+    "A",
+    "DIV",
+    "DIV",
+    "DIV",
+    "H5",
+    "P",
+    "DIV",
+    "I",
+    "DIV",
+    "A",
+    "DIV",
+    "DIV",
+    "DIV",
+    "H5",
+    "P",
+    "DIV",
+    "I",
+    "DIV",
+    "A",
+    "DIV",
+    "DIV",
+    "DIV",
+    "H5",
+    "P",
+    "DIV",
+    "I",
+    "DIV",
+    "A",
+    "DIV",
+    "DIV",
+    "DIV",
+    "H5",
+    "P",
+    "DIV",
+    "I",
+    "SCRIPT",
+    "SCRIPT",
+    "SCRIPT"
+  ],
+  "textContent": "SpringAI\nAS\nSingh, Amrinder\nYour projects\n\nCreate a project\nWaterLoo\nCreated: 3/13/2025\nSpringAi\nCreated: 3/13/2025\nPrototype-1\nCreated: 3/13/2025\nPrototype-2\nCreated: 3/13/2025\nFood\nCreated: 3/13/2025\nNape\nCreated: 3/13/2025\nLeaf\nCreated: 3/13/2025\nPrototype-Ion\nCreated: 3/13/2025\nPaid\nCreated: 3/13/2025\nWaterLoo02\nCreated: 3/13/2025\n",
+  "interactiveElements": [
+    {
+      "tag": "BUTTON",
+      "text": "\n                \n            ",
+      "id": null,
+      "class": "navbar-toggler d-md-none collapsed me-2"
+    },
+    {
+      "tag": "A",
+      "text": "SpringAI",
+      "id": null,
+      "class": "navbar-brand d-flex align-items-center"
+    },
+    {
+      "tag": "A",
+      "text": "AS\nSingh, Amrinder\n",
+      "id": "dropdownUser",
+      "class": "d-flex align-items-center text-dark text-decoration-none dropdown-toggle"
+    },
+    {
+      "tag": "A",
+      "text": "Logout",
+      "id": null,
+      "class": "dropdown-item"
+    },
+    {
+      "tag": "A",
+      "text": "Create a project\n",
+      "id": null,
+      "class": "card-link"
+    },
+    {
+      "tag": "A",
+      "text": "WaterLoo\nCreated: 3/13/2025\n",
+      "id": null,
+      "class": "card-link"
+    },
+    {
+      "tag": "A",
+      "text": "SpringAi\nCreated: 3/13/2025\n",
+      "id": null,
+      "class": "card-link"
+    },
+    {
+      "tag": "A",
+      "text": "Prototype-1\nCreated: 3/13/2025\n",
+      "id": null,
+      "class": "card-link"
+    },
+    {
+      "tag": "A",
+      "text": "Prototype-2\nCreated: 3/13/2025\n",
+      "id": null,
+      "class": "card-link"
+    },
+    {
+      "tag": "A",
+      "text": "Food\nCreated: 3/13/2025\n",
+      "id": null,
+      "class": "card-link"
+    },
+    {
+      "tag": "A",
+      "text": "Nape\nCreated: 3/13/2025\n",
+      "id": null,
+      "class": "card-link"
+    },
+    {
+      "tag": "A",
+      "text": "Leaf\nCreated: 3/13/2025\n",
+      "id": null,
+      "class": "card-link"
+    },
+    {
+      "tag": "A",
+      "text": "Prototype-Ion\nCreated: 3/13/2025\n",
+      "id": null,
+      "class": "card-link"
+    },
+    {
+      "tag": "A",
+      "text": "Paid\nCreated: 3/13/2025\n",
+      "id": null,
+      "class": "card-link"
+    },
+    {
+      "tag": "A",
+      "text": "WaterLoo02\nCreated: 3/13/2025\n",
+      "id": null,
+      "class": "card-link"
+    }
+  ],
+  "tables": [],
+  "lists": [
+    {
+      "id": "list-0",
+      "type": "ul",
+      "className": "dropdown-menu dropdown-menu-end text-small shadow",
+      "itemCount": 1,
+      "items": [
+        {
+          "text": "Logout",
+          "hasLinks": true,
+          "hasButtons": false,
+          "className": ""
+        }
+      ],
+      "hasMoreItems": false,
+      "title": "",
+      "context": ""
+    }
+  ],
+  "filename": "script-1741905147816.js"
+}

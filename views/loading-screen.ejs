@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Processing Your Project - SpringAI</title>
+    <meta http-equiv="refresh" content="4;url=/dashboard/project-setup-codeblock?script=<%= scriptFileName %>&projectId=<%= projectId %>">
+    <!-- Font Awesome for icons -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-green: #3EB05B;
+            --light-green: #8FD694;
+            --dark-green: #1A7740;
+            --accent-green: #C5EBC9;
+            --trunk-brown: #706B44;
+            --white: #FFFFFF;
+            --light-gray: #F8F9FA;
+            --text-dark: #333333;
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, var(--dark-green) 0%, var(--primary-green) 100%);
+            color: white;
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        body::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%23ffffff' fill-opacity='0.1' fill-rule='evenodd'/%3E%3C/svg%3E");
+            opacity: 0.3;
+            z-index: -1;
+        }
+        
+        .container {
+            text-align: center;
+            max-width: 600px;
+            padding: 40px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+            position: relative;
+            z-index: 10;
+        }
+        
+        h2 {
+            font-weight: 700;
+            margin-bottom: 30px;
+            font-size: 2.2rem;
+        }
+        
+        p {
+            font-size: 1.1rem;
+            margin-top: 20px;
+            opacity: 0.9;
+        }
+        
+        /* Growing Tree Animation */
+        .tree-container {
+            width: 150px;
+            height: 150px;
+            margin: 20px auto;
+            position: relative;
+        }
+        
+        .trunk {
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 16px;
+            height: 0;
+            background-color: var(--trunk-brown);
+            border-radius: 4px;
+            animation: grow-trunk 2s ease-out forwards;
+        }
+        
+        .leaves-container {
+            position: absolute;
+            bottom: 50px;
+            left: 50%;
+            transform: translateX(-50%);
+            opacity: 0;
+            animation: fade-in 0.5s ease-out 1s forwards;
+        }
+        
+        .leaf {
+            position: absolute;
+            width: 40px;
+            height: 40px;
+            background-color: var(--light-green);
+            border-radius: 50% 0 50% 50%;
+            transform: rotate(45deg) scale(0);
+            transform-origin: bottom right;
+        }
+        
+        .leaf-1 {
+            top: -30px;
+            left: -60px;
+            animation: grow-leaf 0.5s ease-out 1.2s forwards;
+        }
+        
+        .leaf-2 {
+            top: -60px;
+            left: -30px;
+            animation: grow-leaf 0.5s ease-out 1.4s forwards;
+        }
+        
+        .leaf-3 {
+            top: -70px;
+            left: 10px;
+            animation: grow-leaf 0.5s ease-out 1.6s forwards;
+        }
+        
+        .leaf-4 {
+            top: -60px;
+            left: 50px;
+            animation: grow-leaf 0.5s ease-out 1.8s forwards;
+        }
+        
+        .leaf-5 {
+            top: -30px;
+            left: 70px;
+            animation: grow-leaf 0.5s ease-out 2s forwards;
+        }
+        
+        .leaf-6 {
+            top: 0px;
+            left: 60px;
+            animation: grow-leaf 0.5s ease-out 2.2s forwards;
+        }
+        
+        .leaf-7 {
+            top: 10px;
+            left: 30px;
+            animation: grow-leaf 0.5s ease-out 2.4s forwards;
+        }
+        
+        .leaf-8 {
+            top: 0px;
+            left: -20px;
+            animation: grow-leaf 0.5s ease-out 2.6s forwards;
+        }
+        
+        .floating-leaves {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: -1;
+        }
+        
+        .floating-leaf {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background-color: var(--accent-green);
+            border-radius: 50% 0 50% 50%;
+            transform: rotate(45deg);
+            opacity: 0.7;
+            z-index: -1;
+        }
+        
+        @keyframes grow-trunk {
+            0% {
+                height: 0;
+            }
+            100% {
+                height: 70px;
+            }
+        }
+        
+        @keyframes grow-leaf {
+            0% {
+                transform: rotate(45deg) scale(0);
+            }
+            60% {
+                transform: rotate(45deg) scale(1.2);
+            }
+            100% {
+                transform: rotate(45deg) scale(1);
+            }
+        }
+        
+        @keyframes fade-in {
+            0% {
+                opacity: 0;
+            }
+            100% {
+                opacity: 1;
+            }
+        }
+        
+        @keyframes float-leaf {
+            0% {
+                transform: translateY(0) rotate(45deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 0.7;
+            }
+            100% {
+                transform: translateY(100vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+        
+        .progress-text {
+            font-weight: 600;
+            color: var(--white);
+            margin-top: 10px;
+            font-size: 1.1rem;
+        }
+        
+        .progress-bar {
+            width: 100%;
+            height: 10px;
+            background-color: rgba(255, 255, 255, 0.2);
+            border-radius: 5px;
+            margin-top: 15px;
+            overflow: hidden;
+        }
+        
+        .progress {
+            height: 100%;
+            width: 0;
+            background-color: var(--white);
+            border-radius: 5px;
+            animation: progress 7s ease-in-out infinite;
+        }
+        
+        @keyframes progress {
+            0% {
+                width: 0;
+            }
+            50% {
+                width: 70%;
+            }
+            100% {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <script>
+        // Create floating leaves
+        document.addEventListener('DOMContentLoaded', function() {
+            const floatingLeaves = document.querySelector('.floating-leaves');
+            
+            for (let i = 0; i < 15; i++) {
+                createLeaf();
+            }
+            
+            function createLeaf() {
+                const leaf = document.createElement('div');
+                leaf.classList.add('floating-leaf');
+                
+                // Random position
+                leaf.style.left = Math.random() * 100 + 'vw';
+                leaf.style.top = -30 + 'px';
+                
+                // Random size
+                const size = Math.random() * 15 + 10;
+                leaf.style.width = size + 'px';
+                leaf.style.height = size + 'px';
+                
+                // Random opacity
+                leaf.style.opacity = Math.random() * 0.5 + 0.3;
+                
+                // Random animation duration
+                const duration = Math.random() * 10 + 15;
+                leaf.style.animation = `float-leaf ${duration}s linear forwards`;
+                
+                floatingLeaves.appendChild(leaf);
+                
+                // Remove leaf after animation ends
+                setTimeout(() => {
+                    leaf.remove();
+                    createLeaf();
+                }, duration * 1000);
+            }
+        });
+    </script>
+
+    <div class="floating-leaves"></div>
+    
+    <div class="container">
+        <h2><i class="fas fa-seedling"></i> Growing Your Project</h2>
+        
+        <div class="tree-container">
+            <div class="trunk"></div>
+            <div class="leaves-container">
+                <div class="leaf leaf-1"></div>
+                <div class="leaf leaf-2"></div>
+                <div class="leaf leaf-3"></div>
+                <div class="leaf leaf-4"></div>
+                <div class="leaf leaf-5"></div>
+                <div class="leaf leaf-6"></div>
+                <div class="leaf leaf-7"></div>
+                <div class="leaf leaf-8"></div>
+            </div>
+        </div>
+        
+        <div class="progress-text">Planting seeds of innovation...</div>
+        <div class="progress-bar">
+            <div class="progress"></div>
+        </div>
+        
+        <p>Your SpringAI project is being prepared. Sit back while we cultivate the perfect environment for your ideas to flourish.</p>
+    </div>
+</body>
+</html>

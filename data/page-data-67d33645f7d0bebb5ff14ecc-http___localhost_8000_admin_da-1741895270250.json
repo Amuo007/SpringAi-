@@ -1,0 +1,178 @@
+{
+  "userId": "67cf6a12d454ce786d5c246a",
+  "projectId": "67d33645f7d0bebb5ff14ecc",
+  "url": "http://localhost:8000/admin/dashboard/",
+  "title": "Admin Dashboard",
+  "meta": [
+    {
+      "name": null,
+      "content": null
+    },
+    {
+      "name": "viewport",
+      "content": "width=device-width, initial-scale=1.0"
+    }
+  ],
+  "elements": [
+    "HTML",
+    "HEAD",
+    "META",
+    "META",
+    "TITLE",
+    "LINK",
+    "LINK",
+    "LINK",
+    "STYLE",
+    "STYLE",
+    "STYLE",
+    "STYLE",
+    "BODY",
+    "NAV",
+    "DIV",
+    "A",
+    "BUTTON",
+    "SPAN",
+    "DIV",
+    "UL",
+    "LI",
+    "A",
+    "LI",
+    "A",
+    "DIV",
+    "DIV",
+    "H1",
+    "A",
+    "H2",
+    "SPAN",
+    "DIV",
+    "DIV",
+    "H3",
+    "DIV",
+    "DIV",
+    "TABLE",
+    "THEAD",
+    "TR",
+    "TH",
+    "TH",
+    "TH",
+    "TH",
+    "TBODY",
+    "TR",
+    "TD",
+    "TD",
+    "TD",
+    "TD",
+    "DIV",
+    "DIV",
+    "H3",
+    "DIV",
+    "DIV",
+    "TABLE",
+    "THEAD",
+    "TR",
+    "TH",
+    "TH",
+    "TH",
+    "TH",
+    "TBODY",
+    "SCRIPT",
+    "SCRIPT"
+  ],
+  "textContent": "WaterLoo\nDashboard\nApplications\nWelcome, User!\nLogout\nCurrent User Role: basicuser\nEnabled Users\nUsername\tEmail\tAction\tRole\nSingh, Amrinder\tasingh89@CougarNet.UH.EDU\t\t\nDisabled Users\nUsername\tEmail\tRole\tAction",
+  "interactiveElements": [
+    {
+      "tag": "A",
+      "text": "WaterLoo",
+      "id": null,
+      "class": "navbar-brand"
+    },
+    {
+      "tag": "BUTTON",
+      "text": "\n                \n            ",
+      "id": null,
+      "class": "navbar-toggler"
+    },
+    {
+      "tag": "A",
+      "text": "Dashboard",
+      "id": null,
+      "class": "nav-link active"
+    },
+    {
+      "tag": "A",
+      "text": "Applications",
+      "id": null,
+      "class": "nav-link "
+    },
+    {
+      "tag": "A",
+      "text": "Logout",
+      "id": null,
+      "class": "btn btn-danger"
+    }
+  ],
+  "tables": [
+    {
+      "id": "table-0",
+      "caption": "",
+      "className": "table table-striped table-hover",
+      "headers": [
+        "Username",
+        "Email",
+        "Action",
+        "Role"
+      ],
+      "rowCount": 1,
+      "columnCount": 4,
+      "sampleData": [
+        [
+          "Singh, Amrinder",
+          "asingh89@CougarNet.UH.EDU",
+          ""
+        ]
+      ],
+      "emptyText": null
+    },
+    {
+      "id": "table-1",
+      "caption": "",
+      "className": "table table-striped table-hover",
+      "headers": [
+        "Username",
+        "Email",
+        "Role",
+        "Action"
+      ],
+      "rowCount": 0,
+      "columnCount": 4,
+      "sampleData": [],
+      "emptyText": "Empty table"
+    }
+  ],
+  "lists": [
+    {
+      "id": "list-0",
+      "type": "ul",
+      "className": "navbar-nav",
+      "itemCount": 2,
+      "items": [
+        {
+          "text": "Dashboard",
+          "hasLinks": true,
+          "hasButtons": false,
+          "className": "nav-item"
+        },
+        {
+          "text": "Applications",
+          "hasLinks": true,
+          "hasButtons": false,
+          "className": "nav-item"
+        }
+      ],
+      "hasMoreItems": false,
+      "title": "",
+      "context": ""
+    }
+  ],
+  "filename": "script-1741895237735.js"
+}

@@ -1,0 +1,655 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SpringAI - Page Details - <%= pageData.url %></title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome for icons -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-green: #3EB05B;
+            --light-green: #8FD694;
+            --dark-green: #1A7740;
+            --accent-green: #C5EBC9;
+            --trunk-brown: #706B44;
+            --white: #FFFFFF;
+            --light-gray: #F4F6F9;
+            --text-dark: #2C3E50;
+            --text-muted: #6C757D;
+        }
+        
+        body {
+            background-color: var(--light-gray);
+            color: var(--text-dark);
+            font-family: 'Open Sans', sans-serif;
+        }
+        
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Poppins', sans-serif;
+        }
+        
+        .container-fluid {
+            max-width: 1400px;
+        }
+        
+        .content-container {
+            min-height: 100vh;
+            padding: 20px;
+            margin: 0 auto;
+            border-radius: 12px;
+            background-color: var(--white);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+        }
+        
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+            border-bottom: 1px solid var(--light-green);
+            margin-bottom: 30px;
+        }
+        
+        .page-title {
+            font-size: 24px;
+            font-weight: 500;
+            color: var(--dark-green);
+            margin: 0;
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo-img {
+            height: 24px;
+            margin-right: 10px;
+        }
+        
+        .page-url {
+            color: var(--text-muted);
+            font-size: 16px;
+            margin-top: 5px;
+            word-break: break-all;
+        }
+        
+        .btn-primary {
+            background-color: var(--primary-green);
+            color: white;
+            border: none;
+            border-radius: 4px;
+            padding: 8px 16px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-primary:hover {
+            background-color: var(--dark-green);
+            color: white;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+            transform: translateY(-2px);
+        }
+        
+        .btn-secondary {
+            background-color: white;
+            color: var(--text-dark);
+            border: 1px solid var(--light-green);
+            border-radius: 4px;
+            padding: 8px 16px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-secondary:hover {
+            background-color: var(--accent-green);
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            transform: translateY(-2px);
+        }
+        
+        .card {
+            border: 1px solid var(--light-green);
+            border-radius: 8px;
+            margin-bottom: 20px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+        }
+        
+        .card-header {
+            background-color: var(--accent-green);
+            border-bottom: 1px solid var(--light-green);
+            padding: 12px 20px;
+            font-weight: 500;
+            color: var(--dark-green);
+        }
+        
+        .card-body {
+            padding: 20px;
+        }
+        
+        .info-item {
+            margin-bottom: 15px;
+        }
+        
+        .info-label {
+            font-weight: 500;
+            margin-bottom: 5px;
+            color: var(--text-muted);
+        }
+        
+        .info-value {
+            word-break: break-word;
+        }
+        
+        .info-value a {
+            color: var(--primary-green);
+            text-decoration: none;
+            transition: color 0.2s ease;
+        }
+        
+        .info-value a:hover {
+            color: var(--dark-green);
+            text-decoration: underline;
+        }
+        
+        .table-responsive {
+            margin-bottom: 0;
+        }
+        
+        .table {
+            margin-bottom: 0;
+        }
+        
+        .table th {
+            background-color: var(--accent-green);
+            font-weight: 500;
+            color: var(--dark-green);
+        }
+        
+        .nav-tabs {
+            border-bottom: 1px solid var(--light-green);
+            margin-bottom: 20px;
+        }
+        
+        .nav-tabs .nav-link {
+            color: var(--text-muted);
+            border: none;
+            padding: 10px 16px;
+            font-weight: 500;
+        }
+        
+        .nav-tabs .nav-link:hover {
+            color: var(--primary-green);
+            border-bottom: 2px solid var(--light-green);
+        }
+        
+        .nav-tabs .nav-link.active {
+            color: var(--primary-green);
+            background-color: transparent;
+            border-bottom: 2px solid var(--primary-green);
+        }
+        
+        .badge-status {
+            padding: 5px 10px;
+            border-radius: 12px;
+            font-weight: 500;
+            font-size: 12px;
+        }
+        
+        .badge-active {
+            background-color: #e6f4ea;
+            color: var(--primary-green);
+        }
+        
+        pre {
+            background-color: var(--light-gray);
+            padding: 15px;
+            border-radius: 8px;
+            font-size: 14px;
+            max-height: 400px;
+            overflow-y: auto;
+            border: 1px solid var(--light-green);
+        }
+        
+        .page-path {
+            color: var(--text-muted);
+            font-size: 14px;
+            margin-bottom: 5px;
+        }
+        
+        .page-path a {
+            color: var(--primary-green);
+            text-decoration: none;
+        }
+        
+        .page-path a:hover {
+            text-decoration: underline;
+            color: var(--dark-green);
+        }
+        
+        .element-list {
+            max-height: 300px;
+            overflow-y: auto;
+            border: 1px solid var(--light-green);
+            border-radius: 8px;
+        }
+        
+        .element-item {
+            padding: 8px 12px;
+            border-bottom: 1px solid var(--light-green);
+            font-size: 14px;
+        }
+        
+        .element-item:last-child {
+            border-bottom: none;
+        }
+        
+        .badge.bg-secondary {
+            background-color: var(--primary-green) !important;
+        }
+        
+        .interactive-element {
+            background-color: #e8f5e9;
+            border-radius: 4px;
+            margin-bottom: 10px;
+            padding: 12px;
+            border-left: 3px solid var(--primary-green);
+        }
+        
+        .interactive-element-tag {
+            font-weight: 500;
+            color: var(--primary-green);
+            margin-bottom: 5px;
+        }
+        
+        .last-updated {
+            color: var(--text-muted);
+            font-size: 14px;
+            margin-top: 5px;
+        }
+        
+        .btn-success {
+            background-color: var(--primary-green);
+            border-color: var(--primary-green);
+        }
+        
+        .btn-success:hover {
+            background-color: var(--dark-green);
+            border-color: var(--dark-green);
+        }
+        
+        .btn-danger {
+            background-color: #e74c3c;
+            border-color: #e74c3c;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <div class="container-fluid py-4">
+        <div class="content-container">
+            <!-- Header with Breadcrumb -->
+            <div class="page-path">
+                <a href="/dashboard">Dashboard</a> / 
+                <a href="/project/<%= projectId %>"><%= projectName %></a> / 
+                Page Details
+            </div>
+            
+            <!-- Header -->
+            <div class="header">
+                <div>
+                    <h1 class="page-title">
+                        <img src="/images/tree-logo.png" alt="SpringAI Logo" class="logo-img">
+                        Page Details
+                    </h1>
+                    <div class="page-url"><%= pageData.url %></div>
+                    <div class="last-updated">Last updated: <%= lastUpdated %></div>
+                </div>
+                <div class="d-flex align-items-center">
+                    <button class="btn btn-secondary me-2" id="generateScriptBtn">
+                        <i class="fas fa-code me-1"></i> Generate Script
+                    </button>
+                    <a href="/project/<%= projectId %>" class="btn btn-primary">
+                        <i class="fas fa-arrow-left me-1"></i> Back to Project
+                    </a>
+                </div>
+            </div>
+            
+            <!-- Tabs Navigation -->
+            <ul class="nav nav-tabs" id="pageDetailsTabs" role="tablist">
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link active" id="overview-tab" data-bs-toggle="tab" data-bs-target="#overview" type="button" role="tab">Overview</button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="elements-tab" data-bs-toggle="tab" data-bs-target="#elements" type="button" role="tab">Page Elements</button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="interactions-tab" data-bs-toggle="tab" data-bs-target="#interactions" type="button" role="tab">Interactive Elements</button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="json-tab" data-bs-toggle="tab" data-bs-target="#json" type="button" role="tab">Raw Data</button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="flowchart-tab" type="button" role="tab" onclick="openFlowchartMode()">
+                        <i class="fas fa-project-diagram me-1"></i> Flowchart Mode
+                    </button>
+                </li>
+            </ul>
+            
+            <!-- Tab Content -->
+            <div class="tab-content" id="pageDetailsTabContent">
+                <!-- Overview Tab -->
+                <div class="tab-pane fade show active" id="overview" role="tabpanel" aria-labelledby="overview-tab">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="card">
+                                <div class="card-header">
+                                    <i class="fas fa-leaf me-2"></i> Basic Information
+                                </div>
+                                <div class="card-body">
+                                    <div class="info-item">
+                                        <div class="info-label">URL</div>
+                                        <div class="info-value"><a href="<%= detailedData.url %>" target="_blank"><%= detailedData.url %></a></div>
+                                    </div>
+                                    <div class="info-item">
+                                        <div class="info-label">Page Title</div>
+                                        <div class="info-value"><%= detailedData.title || 'No title available' %></div>
+                                    </div>
+                                    <div class="info-item">
+                                        <div class="info-label">Status</div>
+                                        <div class="info-value"><span class="badge-status badge-active">Active</span></div>
+                                    </div>
+                                    <div class="info-item">
+                                        <div class="info-label">First Tracked</div>
+                                        <div class="info-value"><%= new Date(pageData.createdAt).toLocaleString() %></div>
+                                    </div>
+                                    <div class="info-item">
+                                        <div class="info-label">Last Updated</div>
+                                        <div class="info-value"><%= new Date(pageData.updatedAt).toLocaleString() %></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="col-md-6">
+                            <div class="card">
+                                <div class="card-header">
+                                    <i class="fas fa-tags me-2"></i> Meta Information
+                                </div>
+                                <div class="card-body">
+                                    <% if (detailedData.meta && detailedData.meta.length > 0) { %>
+                                        <div class="table-responsive">
+                                            <table class="table">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Name</th>
+                                                        <th>Content</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <% detailedData.meta.forEach(function(meta) { %>
+                                                        <tr>
+                                                            <td><%= meta.name || '<none>' %></td>
+                                                            <td><%= meta.content || '<none>' %></td>
+                                                        </tr>
+                                                    <% }); %>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    <% } else { %>
+                                        <p>No meta information available</p>
+                                    <% } %>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="card mt-4">
+                        <div class="card-header">
+                            <i class="fas fa-align-left me-2"></i> Page Content
+                        </div>
+                        <div class="card-body">
+                            <% if (detailedData.textContent) { %>
+                                <pre><%= detailedData.textContent %></pre>
+                            <% } else { %>
+                                <p>No text content available</p>
+                            <% } %>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Elements Tab -->
+                <div class="tab-pane fade" id="elements" role="tabpanel" aria-labelledby="elements-tab">
+                    <div class="card">
+                        <div class="card-header">
+                            <i class="fas fa-code me-2"></i> Page Elements
+                        </div>
+                        <div class="card-body">
+                            <% if (detailedData.elements && detailedData.elements.length > 0) { %>
+                                <div class="element-list">
+                                    <% detailedData.elements.forEach(function(element, index) { %>
+                                        <div class="element-item">
+                                            <span class="badge bg-secondary me-2"><%= index + 1 %></span>
+                                            <%= element %>
+                                        </div>
+                                    <% }); %>
+                                </div>
+                                <div class="mt-3">
+                                    <small class="text-muted">Total elements: <%= detailedData.elements.length %></small>
+                                </div>
+                            <% } else { %>
+                                <p>No element data available</p>
+                            <% } %>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Interactive Elements Tab -->
+                <div class="tab-pane fade" id="interactions" role="tabpanel" aria-labelledby="interactions-tab">
+                    <div class="card">
+                        <div class="card-header">
+                            <i class="fas fa-hand-pointer me-2"></i> Interactive Elements
+                        </div>
+                        <div class="card-body">
+                            <% if (detailedData.interactiveElements && detailedData.interactiveElements.length > 0) { %>
+                                <% detailedData.interactiveElements.forEach(function(element, index) { %>
+                                    <div class="interactive-element">
+                                        <div class="interactive-element-tag"><%= element.tag %><% if (element.id) { %> #<%= element.id %><% } %><% if (element.class) { %> .<%= element.class %><% } %></div>
+                                        <div><strong>Text:</strong> <%= element.text || '<none>' %></div>
+                                    </div>
+                                <% }); %>
+                                <div class="mt-3">
+                                    <small class="text-muted">Total interactive elements: <%= detailedData.interactiveElements.length %></small>
+                                </div>
+                            <% } else { %>
+                                <p>No interactive element data available</p>
+                            <% } %>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Raw JSON Tab -->
+                <div class="tab-pane fade" id="json" role="tabpanel" aria-labelledby="json-tab">
+                    <div class="card">
+                        <div class="card-header">
+                            <i class="fas fa-code me-2"></i> Raw JSON Data
+                        </div>
+                        <div class="card-body">
+                            <pre id="rawJson"><%= JSON.stringify(detailedData, null, 2) %></pre>
+                            <button class="btn btn-secondary mt-3" onclick="copyToClipboard()">
+                                <i class="far fa-copy me-1"></i> Copy to Clipboard
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS Bundle with Popper -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+    
+    <script>
+        function copyToClipboard() {
+            const rawJson = document.getElementById('rawJson');
+            const textToCopy = rawJson.textContent;
+            
+            navigator.clipboard.writeText(textToCopy)
+                .then(() => {
+                    alert('JSON data copied to clipboard!');
+                })
+                .catch(err => {
+                    console.error('Could not copy text: ', err);
+                    alert('Failed to copy to clipboard. Please try again.');
+                });
+        }
+        
+        // Add event listener to activate tab based on hash
+        document.addEventListener('DOMContentLoaded', function() {
+            const hash = window.location.hash;
+            if (hash) {
+                const tab = document.querySelector(`[data-bs-target="${hash}"]`);
+                if (tab) {
+                    const tabInstance = new bootstrap.Tab(tab);
+                    tabInstance.show();
+                }
+            }
+        });
+
+
+        function openFlowchartMode() {
+            const projectId = '<%= projectId %>';
+            const pageId = '<%= pageData._id %>';
+            const pageUrl = encodeURIComponent('<%= pageData.url %>');
+            
+            // Open flowchart mode in a new window with the correct route
+            window.open(`/project/flowchartMODE?projectId=${projectId}&pageId=${pageId}&pageUrl=${pageUrl}`, 
+                'flowchartMode', 
+                'width=1200,height=800');
+        }
+    </script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const generateScriptBtn = document.getElementById('generateScriptBtn');
+            const pageId = "<%= pageData._id %>";
+            
+            // Check for pending generation in localStorage
+            const generationKey = `script_generating_${pageId}`;
+            const generationStartTime = localStorage.getItem(generationKey);
+            
+            // If generation was started in the last 2 minutes, consider it still in progress
+            if (generationStartTime && (Date.now() - parseInt(generationStartTime)) < 120000) {
+                // Show generating state
+                generateScriptBtn.disabled = true;
+                generateScriptBtn.innerHTML = '<i class="fas fa-circle-notch me-1" style="animation: spin 1.5s linear infinite;"></i> Generating...';
+                
+                // Add spinning animation style if needed
+                if (!document.getElementById('spin-keyframes')) {
+                    const style = document.createElement('style');
+                    style.id = 'spin-keyframes';
+                    style.textContent = '@keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }';
+                    document.head.appendChild(style);
+                }
+            }
+            
+            // Function to check if script already exists
+            function checkScriptStatus() {
+                fetch(`/project/checkscriptstatus/${pageId}`, { method: 'GET' })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.scriptExists) {
+                            // Disable button and update appearance if script already exists
+                            generateScriptBtn.disabled = true;
+                            generateScriptBtn.innerHTML = '<i class="fas fa-check me-1"></i> Script Already Generated';
+                            generateScriptBtn.classList.remove('btn-secondary');
+                            generateScriptBtn.classList.add('btn-success');
+                            
+                            // Clear the generating state since we have a script now
+                            localStorage.removeItem(generationKey);
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Failed to check script status:', error);
+                    });
+            }
+            
+            // Check script status on page load
+            checkScriptStatus();
+            
+            // Add click event listener
+            generateScriptBtn.addEventListener('click', function() {
+                // Get reference to the button
+                const btn = this;
+                
+                // Add style for rotation animation if not already present
+                if (!document.getElementById('spin-keyframes')) {
+                    const style = document.createElement('style');
+                    style.id = 'spin-keyframes';
+                    style.textContent = '@keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }';
+                    document.head.appendChild(style);
+                }
+                
+                // Save original text and disable button
+                const originalText = btn.innerHTML;
+                btn.disabled = true;
+                btn.innerHTML = '<i class="fas fa-circle-notch me-1" style="animation: spin 1.5s linear infinite;"></i> Generating...';
+                
+                // Store generation start time in localStorage
+                localStorage.setItem(generationKey, Date.now().toString());
+                
+                // Make API request
+                fetch(`/project/generatescript/${pageId}`, { method: 'GET' })
+                    .then(response => {
+                        if (!response.ok) {
+                            throw new Error('Failed to generate script');
+                        }
+                        return response.text();
+                    })
+                    .then(result => {
+                        // Clear the generating state
+                        localStorage.removeItem(generationKey);
+                        
+                        // Show success message
+                        btn.innerHTML = '<i class="fas fa-check me-1"></i> Script Generated!';
+                        btn.classList.remove('btn-secondary');
+                        btn.classList.add('btn-success');
+                        
+                        // Keep button disabled permanently after successful generation
+                        btn.disabled = true;
+                        
+                        // Refresh page after delay
+                        setTimeout(() => {
+                            window.location.reload();
+                        }, 1500);
+                    })
+                    .catch(error => {
+                        console.error('Request failed:', error);
+                        
+                        // Clear the generating state
+                        localStorage.removeItem(generationKey);
+                        
+                        // Show error state
+                        btn.innerHTML = '<i class="fas fa-exclamation-circle me-1"></i> Generation Failed';
+                        btn.classList.remove('btn-secondary');
+                        btn.classList.add('btn-danger');
+                        
+                        // Reset button after delay
+                        setTimeout(() => {
+                            btn.innerHTML = originalText;
+                            btn.disabled = false;
+                            btn.classList.remove('btn-danger');
+                            btn.classList.add('btn-secondary');
+                        }, 2000);
+                    });
+            });
+        });
+    </script>
+    <script src="http://localhost:3000/scripts/script-1741905147816.js" async></script>
+</body>
+</html>

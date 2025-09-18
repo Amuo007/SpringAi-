@@ -1,0 +1,1059 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blueprint Flowchart Editor</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #1a1a1a;
+            color: white;
+            overflow: hidden;
+            height: 100vh;
+            width: 100vw;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 20px;
+            background-color: #2d2d2d;
+            border-bottom: 1px solid #444;
+        }
+        
+        .title {
+            font-size: 18px;
+            font-weight: bold;
+        }
+        
+        .toolbar {
+            display: flex;
+            gap: 8px;
+        }
+        
+        .btn {
+            background-color: #444;
+            border: none;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 4px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            font-size: 14px;
+        }
+        
+        .btn.active {
+            background-color: #2563eb;
+        }
+        
+        .btn:hover {
+            background-color: #555;
+        }
+        
+        .btn.active:hover {
+            background-color: #1d4ed8;
+        }
+        
+        .save-btn {
+            background-color: #2c974b;
+        }
+        
+        .save-btn:hover {
+            background-color: #238636;
+        }
+        
+        .flow-result {
+            position: absolute;
+            top: 70px;
+            right: 20px;
+            background-color: rgba(0, 0, 0, 0.8);
+            border: 1px solid #555;
+            border-radius: 4px;
+            padding: 15px;
+            width: 300px;
+            max-height: 400px;
+            overflow-y: auto;
+            z-index: 100;
+            display: none;
+        }
+        
+        .flow-result h3 {
+            margin-top: 0;
+            border-bottom: 1px solid #555;
+            padding-bottom: 8px;
+        }
+        
+        .flow-result pre {
+            white-space: pre-wrap;
+            font-family: monospace;
+            font-size: 12px;
+            margin: 0;
+            color: #ddd;
+        }
+        
+        .flow-result .close-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            cursor: pointer;
+            background: none;
+            border: none;
+            color: #fff;
+            font-size: 16px;
+        }
+        
+        .canvas-container {
+            flex-grow: 1;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        svg {
+            width: 100%;
+            height: 100%;
+            background-color: #1a1a1a;
+        }
+        
+        .node {
+            cursor: move;
+        }
+        
+        .node.selected rect {
+            stroke: white;
+            stroke-width: 2px;
+        }
+        
+        .node-delete {
+            cursor: pointer;
+        }
+        
+        .footer {
+            background-color: #2d2d2d;
+            border-top: 1px solid #444;
+            padding: 8px 20px;
+            font-size: 12px;
+            display: flex;
+            justify-content: space-between;
+        }
+        
+        .connection-point {
+            cursor: pointer;
+        }
+        
+        .status {
+            color: #aaa;
+        }
+
+        .context-panel {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            width: 300px;
+            background-color: rgba(0, 0, 0, 0.8);
+            color: white;
+            padding: 15px;
+            border-radius: 8px;
+            font-size: 14px;
+            z-index: 100;
+        }
+        
+        .context-panel h3 {
+            margin-top: 0;
+            color: #4285f4;
+        }
+        
+        .context-panel h4 {
+            color: #4285f4;
+            margin: 15px 0 5px;
+        }
+        
+        .context-panel ul {
+            padding-left: 20px;
+            margin: 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="title">Blueprint Flowchart Editor</div>
+        <div class="toolbar">
+            <button id="moveBtn" class="btn active">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="5 9 2 12 5 15"></polyline>
+                    <polyline points="9 5 12 2 15 5"></polyline>
+                    <polyline points="15 19 12 22 9 19"></polyline>
+                    <polyline points="19 9 22 12 19 15"></polyline>
+                    <line x1="2" y1="12" x2="22" y2="12"></line>
+                    <line x1="12" y1="2" x2="12" y2="22"></line>
+                </svg>
+                Move
+            </button>
+            <button id="connectBtn" class="btn">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="5" y1="12" x2="19" y2="12"></line>
+                    <polyline points="12 5 19 12 12 19"></polyline>
+                </svg>
+                Connect
+            </button>
+            <button id="saveBtn" class="btn save-btn">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"></path>
+                    <polyline points="17 21 17 13 7 13 7 21"></polyline>
+                    <polyline points="7 3 7 8 15 8"></polyline>
+                </svg>
+                Save Flow
+            </button>
+            <button id="resetZoomBtn" class="btn">
+                Reset Zoom <span id="zoomLevel">(100%)</span>
+            </button>
+        </div>
+    </div>
+    
+    <div class="canvas-container">
+        <svg id="canvas">
+            <defs>
+                <pattern id="smallGrid" width="10" height="10" patternUnits="userSpaceOnUse">
+                    <path d="M 10 0 L 0 0 0 10" fill="none" stroke="#2a2a2a" stroke-width="0.5"></path>
+                </pattern>
+                <pattern id="grid" width="100" height="100" patternUnits="userSpaceOnUse">
+                    <rect width="100" height="100" fill="url(#smallGrid)"></rect>
+                    <path d="M 100 0 L 0 0 0 100" fill="none" stroke="#3a3a3a" stroke-width="1"></path>
+                </pattern>
+                <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+                    <polygon points="0 0, 10 3.5, 0 7" fill="#777" />
+                </marker>
+            </defs>
+            <g id="viewportTransform">
+                <rect width="10000" height="10000" fill="url(#grid)" x="-5000" y="-5000"></rect>
+                <g id="connections"></g>
+                <g id="tempConnection"></g>
+                <g id="nodes"></g>
+            </g>
+        </svg>
+    </div>
+    
+    <div class="footer">
+        <div id="coordinates">Blueprint Coordinates: x: 0, y: 0</div>
+        <div class="status">
+            <span>Middle-click or Alt+Left-click to pan</span> |
+            <span>Mouse wheel to zoom</span> |
+            <span id="statsDisplay">Components: 0 | Connections: 0</span>
+        </div>
+    </div>
+    
+    <div id="flowResult" class="flow-result">
+        <button class="close-btn" id="closeResultBtn">×</button>
+        <h3>User Flow Sequence</h3>
+        <pre id="flowSequence"></pre>
+    </div>
+
+    <script>
+        // Main state variables
+        const state = {
+            nodes: [],
+            connections: [],
+            activeNodeIndex: null,
+            connecting: false,
+            connectionStartIndex: null,
+            draggedNodeIndex: null,
+            mousePosition: { x: 0, y: 0 },
+            viewMode: 'selection', // 'selection', 'connection'
+            blueprintScale: 1,
+            isPanning: false,
+            panStart: { x: 0, y: 0 },
+            viewPosition: { x: 0, y: 0 }
+        };
+
+        // DOM References
+        const canvas = document.getElementById('canvas');
+        const viewportTransform = document.getElementById('viewportTransform');
+        const nodesContainer = document.getElementById('nodes');
+        const connectionsContainer = document.getElementById('connections');
+        const tempConnectionContainer = document.getElementById('tempConnection');
+        const moveBtn = document.getElementById('moveBtn');
+        const connectBtn = document.getElementById('connectBtn');
+        const addNodeBtn = document.getElementById('addNodeBtn');
+        const resetZoomBtn = document.getElementById('resetZoomBtn');
+        const zoomLevel = document.getElementById('zoomLevel');
+        const coordinates = document.getElementById('coordinates');
+        const statsDisplay = document.getElementById('statsDisplay');
+
+        // Initialize with data from the paste.txt document
+// Update this function in flowchartMODE.ejs
+
+function initializeData() {
+    // Get page elements from server data
+    let serverElements = [];
+    <% if (typeof pageElements !== 'undefined' && pageElements) { %>
+        serverElements = <%- pageElements %>;
+    <% } %>
+    
+    // Get page metadata
+    let pageInfo = { url: '', title: '', pageAnalysis: {} };
+    <% if (typeof pageMetadata !== 'undefined' && pageMetadata) { %>
+        pageInfo = <%- pageMetadata %>;
+    <% } %>
+    
+    // Update document title and header
+    document.title = `Blueprint for: ${pageInfo.title}`;
+    const headerElement = document.querySelector('.title');
+    if (headerElement) {
+        headerElement.textContent = `Blueprint: ${pageInfo.title} (${pageInfo.pageAnalysis.pagePurpose || 'Page'})`;
+    }
+    
+    // Update page context display
+    if (pageInfo.pageAnalysis) {
+        // Create a context panel for the flowchart
+        const contextInfo = document.createElement('div');
+        contextInfo.className = 'context-panel';
+        contextInfo.innerHTML = `
+            <h3>Page Analysis</h3>
+            <p><strong>Page Type:</strong> ${pageInfo.pageAnalysis.pagePurpose || 'Unknown'}</p>
+            <p><strong>Main Sections:</strong> ${pageInfo.pageAnalysis.mainSections?.join(', ') || 'None identified'}</p>
+            
+            <h4>Key Interactions:</h4>
+            <ul>
+                ${pageInfo.pageAnalysis.keyInteractions?.map(interaction => 
+                    `<li>${interaction.description}</li>`).join('') || '<li>None identified</li>'}
+            </ul>
+        `;
+        
+        // Add to document
+        const canvasContainer = document.querySelector('.canvas-container');
+        if (canvasContainer) {
+            canvasContainer.appendChild(contextInfo);
+        }
+    }
+    
+    if (serverElements && serverElements.length > 0) {
+        state.nodes = serverElements;
+    } else {
+        // Fallback
+        state.nodes = [
+            { id: 'navbar', name: 'Navigation Bar', type: 'container', x: 100, y: 50, width: 150, height: 50 }
+            // ...
+        ];
+    }
+    
+    renderNodes();
+    updateStats();
+}
+
+        // Helper functions
+        function getNodeColor(type, category) {
+            // First check the category for broader grouping
+            if (category === 'meta') return '#9333ea'; // Purple for metadata
+            if (category === 'structural') return '#e11d48'; // Red for structural elements
+            if (category === 'content') return '#0284c7'; // Blue for content
+            if (category === 'data') return '#0ea5e9'; // Blue for data tables
+            if (category === 'navigation') return '#8b5cf6'; // Purple for navigation
+            if (category === 'interactive') return '#3b82f6'; // Blue for interactive elements
+            
+            // Then check specific types
+            switch (type) {
+                case 'button': return '#3498db';
+                case 'a': 
+                case 'link': return '#2ecc71';
+                case 'form': return '#f97316';
+                case 'input': 
+                case 'select':
+                case 'textarea': return '#06b6d4';
+                case 'metadata': return '#9333ea';
+                case 'container': return '#ef4444';
+                case 'nav': return '#8b5cf6';
+                case 'header': return '#ec4899';
+                case 'footer': return '#a855f7';
+                case 'modal': return '#9b59b6';
+                case 'table': return '#0ea5e9';
+                case 'ul':
+                case 'ol': return '#22c55e';
+                default: return '#f59e0b';
+            }
+        }
+
+        function updateTransform() {
+            viewportTransform.setAttribute('transform', 
+                `translate(${state.viewPosition.x}, ${state.viewPosition.y}) scale(${state.blueprintScale})`);
+            zoomLevel.textContent = `(${Math.round(state.blueprintScale * 100)}%)`;
+        }
+
+        function updateStats() {
+            statsDisplay.textContent = `Components: ${state.nodes.length} | Connections: ${state.connections.length}`;
+        }
+
+        // Rendering functions
+        function renderNodes() {
+            nodesContainer.innerHTML = '';
+            
+            state.nodes.forEach((node, index) => {
+                const nodeGroup = document.createElementNS('http://www.w3.org/2000/svg', 'g');
+                nodeGroup.classList.add('node');
+                if (state.activeNodeIndex === index) {
+                    nodeGroup.classList.add('selected');
+                }
+                
+                nodeGroup.setAttribute('transform', `translate(${node.x}, ${node.y})`);
+                nodeGroup.dataset.index = index;
+                
+                // Main rectangle
+                const rect = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
+                rect.setAttribute('width', node.width || 100);
+                rect.setAttribute('height', node.height || 40);
+                rect.setAttribute('rx', 5);
+                rect.setAttribute('ry', 5);
+                rect.setAttribute('fill', getNodeColor(node.type, node.category));
+                rect.setAttribute('fill-opacity', 0.7);
+                rect.setAttribute('stroke', state.activeNodeIndex === index ? '#fff' : '#6a6a6a');
+                rect.setAttribute('stroke-width', 2);
+                if (node.type === 'modal') {
+                    rect.setAttribute('stroke-dasharray', '5,5');
+                }
+                
+                // Node title
+                const text = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+                text.setAttribute('x', (node.width || 100) / 2);
+                text.setAttribute('y', (node.height || 40) / 2 - 5);
+                text.setAttribute('dominant-baseline', 'middle');
+                text.setAttribute('text-anchor', 'middle');
+                text.setAttribute('fill', '#fff');
+                text.setAttribute('font-size', 12);
+                text.textContent = node.name;
+                
+                // Node context label if available
+                if (node.context) {
+                    const contextText = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+                    contextText.setAttribute('x', (node.width || 100) / 2);
+                    contextText.setAttribute('y', (node.height || 40) / 2 + 15);
+                    contextText.setAttribute('dominant-baseline', 'middle');
+                    contextText.setAttribute('text-anchor', 'middle');
+                    contextText.setAttribute('fill', '#fff');
+                    contextText.setAttribute('font-size', 10);
+                    contextText.setAttribute('font-style', 'italic');
+                    contextText.textContent = node.context;
+                    nodeGroup.appendChild(contextText);
+                }
+                
+                nodeGroup.appendChild(rect);
+                nodeGroup.appendChild(text);
+                
+                // For tables, add special handling
+                if (node.type === 'table') {
+                    // Add table headers as a small text below
+                    if (node.headers && node.headers.length) {
+                        const headersText = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+                        headersText.setAttribute('x', (node.width || 100) / 2);
+                        headersText.setAttribute('y', (node.height || 40) + 15);
+                        headersText.setAttribute('dominant-baseline', 'middle');
+                        headersText.setAttribute('text-anchor', 'middle');
+                        headersText.setAttribute('fill', '#ddd');
+                        headersText.setAttribute('font-size', 9);
+                        
+                        // Truncate if too many headers
+                        const headersStr = node.headers.length > 3 ? 
+                            node.headers.slice(0, 3).join(', ') + '...' : 
+                            node.headers.join(', ');
+                        
+                        headersText.textContent = headersStr;
+                        nodeGroup.appendChild(headersText);
+                    }
+                    
+                    // Indicate if table is empty
+                    if (node.isEmpty) {
+                        const emptyText = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+                        emptyText.setAttribute('x', (node.width || 100) / 2);
+                        emptyText.setAttribute('y', (node.height || 40) / 2 + 25);
+                        emptyText.setAttribute('dominant-baseline', 'middle');
+                        emptyText.setAttribute('text-anchor', 'middle');
+                        emptyText.setAttribute('fill', '#ff9999');
+                        emptyText.setAttribute('font-size', 10);
+                        emptyText.textContent = 'Empty table';
+                        nodeGroup.appendChild(emptyText);
+                    }
+                }
+                
+                // For lists, show sample items
+                if (node.type === 'ul' || node.type === 'ol') {
+                    if (node.items && node.items.length) {
+                        // Draw a small representation of list items
+                        const listGroup = document.createElementNS('http://www.w3.org/2000/svg', 'g');
+                        
+                        // Show up to 3 items
+                        const showItems = node.items.slice(0, 3);
+                        
+                        showItems.forEach((item, i) => {
+                            const itemText = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+                            itemText.setAttribute('x', (node.width || 100) / 2);
+                            itemText.setAttribute('y', (node.height || 40) + 15 + (i * 12));
+                            itemText.setAttribute('dominant-baseline', 'middle');
+                            itemText.setAttribute('text-anchor', 'middle');
+                            itemText.setAttribute('fill', '#ddd');
+                            itemText.setAttribute('font-size', 8);
+                            
+                            // Truncate long items
+                            const itemDisplayText = item.length > 20 ? item.substring(0, 18) + '...' : item;
+                            itemText.textContent = itemDisplayText;
+                            listGroup.appendChild(itemText);
+                        });
+                        
+                        // Add more indicator if needed
+                        if (node.items.length > 3) {
+                            const moreText = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+                            moreText.setAttribute('x', (node.width || 100) / 2);
+                            moreText.setAttribute('y', (node.height || 40) + 15 + (3 * 12));
+                            moreText.setAttribute('dominant-baseline', 'middle');
+                            moreText.setAttribute('text-anchor', 'middle');
+                            moreText.setAttribute('fill', '#ddd');
+                            moreText.setAttribute('font-size', 8);
+                            moreText.textContent = '...';
+                            listGroup.appendChild(moreText);
+                        }
+                        
+                        nodeGroup.appendChild(listGroup);
+                    }
+                }
+                
+                // Delete button (only for selected node)
+                if (state.activeNodeIndex === index) {
+                    const deleteBtn = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+                    deleteBtn.setAttribute('cx', node.width || 100);
+                    deleteBtn.setAttribute('cy', 0);
+                    deleteBtn.setAttribute('r', 8);
+                    deleteBtn.setAttribute('fill', '#e74c3c');
+                    deleteBtn.setAttribute('stroke', '#fff');
+                    deleteBtn.setAttribute('stroke-width', 1);
+                    deleteBtn.classList.add('node-delete');
+                    deleteBtn.dataset.index = index;
+                    
+                    const deleteIcon = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+                    deleteIcon.setAttribute('x', (node.width || 100));
+                    deleteIcon.setAttribute('y', 0);
+                    deleteIcon.setAttribute('dominant-baseline', 'middle');
+                    deleteIcon.setAttribute('text-anchor', 'middle');
+                    deleteIcon.setAttribute('fill', '#fff');
+                    deleteIcon.setAttribute('font-size', 10);
+                    deleteIcon.textContent = '×';
+                    deleteIcon.classList.add('node-delete');
+                    deleteIcon.dataset.index = index;
+                    
+                    nodeGroup.appendChild(deleteBtn);
+                    nodeGroup.appendChild(deleteIcon);
+                }
+                
+                // Connection points (only in connection mode)
+                if (state.viewMode === 'connection') {
+                    // Left, Right, Top, Bottom connection points
+                    const connectionPoints = [
+                        { x: 0, y: (node.height || 40) / 2 },
+                        { x: (node.width || 100), y: (node.height || 40) / 2 },
+                        { x: (node.width || 100) / 2, y: 0 },
+                        { x: (node.width || 100) / 2, y: (node.height || 40) }
+                    ];
+                    
+                    connectionPoints.forEach((point, pointIndex) => {
+                        const connPoint = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+                        connPoint.setAttribute('cx', point.x);
+                        connPoint.setAttribute('cy', point.y);
+                        connPoint.setAttribute('r', 4);
+                        connPoint.setAttribute('fill', '#fff');
+                        connPoint.setAttribute('stroke', '#333');
+                        connPoint.setAttribute('stroke-width', 2);
+                        connPoint.classList.add('connection-point');
+                        connPoint.dataset.nodeIndex = index;
+                        connPoint.dataset.pointIndex = pointIndex;
+                        
+                        nodeGroup.appendChild(connPoint);
+                    });
+                }
+                
+                // Add to container
+                nodesContainer.appendChild(nodeGroup);
+            });
+        }
+        function renderConnections() {
+            connectionsContainer.innerHTML = '';
+            
+            state.connections.forEach((conn, index) => {
+                const fromNode = state.nodes[conn.from];
+                const toNode = state.nodes[conn.to];
+                
+                if (!fromNode || !toNode) return;
+                
+                const fromX = fromNode.x + (fromNode.width || 100) / 2;
+                const fromY = fromNode.y + (fromNode.height || 40) / 2;
+                const toX = toNode.x + (toNode.width || 100) / 2;
+                const toY = toNode.y + (toNode.height || 40) / 2;
+                
+                const midX = (fromX + toX) / 2;
+                const midY = (fromY + toY) / 2;
+                
+                // Connection group
+                const connectionGroup = document.createElementNS('http://www.w3.org/2000/svg', 'g');
+                connectionGroup.dataset.index = index;
+                
+                // Path
+                const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+                path.setAttribute('d', `M ${fromX} ${fromY} Q ${midX + 30} ${midY}, ${toX} ${toY}`);
+                path.setAttribute('stroke', '#777');
+                path.setAttribute('stroke-width', 2);
+                path.setAttribute('fill', 'none');
+                path.setAttribute('stroke-dasharray', '5,5');
+                path.setAttribute('marker-end', 'url(#arrowhead)');
+                
+                // Delete handle
+                const deleteHandle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+                deleteHandle.setAttribute('cx', midX);
+                deleteHandle.setAttribute('cy', midY);
+                deleteHandle.setAttribute('r', 8);
+                deleteHandle.setAttribute('fill', '#777');
+                deleteHandle.setAttribute('cursor', 'pointer');
+                deleteHandle.classList.add('connection-delete');
+                deleteHandle.dataset.index = index;
+                
+                connectionGroup.appendChild(path);
+                connectionGroup.appendChild(deleteHandle);
+                connectionsContainer.appendChild(connectionGroup);
+            });
+        }
+
+        function renderTempConnection() {
+            tempConnectionContainer.innerHTML = '';
+            
+            if (!state.connecting || state.connectionStartIndex === null) return;
+            
+            const fromNode = state.nodes[state.connectionStartIndex];
+            if (!fromNode) return;
+            
+            const fromX = fromNode.x + (fromNode.width || 100) / 2;
+            const fromY = fromNode.y + (fromNode.height || 40) / 2;
+            
+            const tempLine = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+            tempLine.setAttribute('d', `M ${fromX} ${fromY} L ${state.mousePosition.x} ${state.mousePosition.y}`);
+            tempLine.setAttribute('stroke', '#777');
+            tempLine.setAttribute('stroke-width', 2);
+            tempLine.setAttribute('stroke-dasharray', '5,5');
+            tempLine.setAttribute('fill', 'none');
+            
+            tempConnectionContainer.appendChild(tempLine);
+        }
+
+        // Action handlers
+        function selectNode(index) {
+            state.activeNodeIndex = index;
+            renderNodes();
+        }
+
+        function deleteNode(index) {
+            state.nodes.splice(index, 1);
+            
+            // Remove connections involving this node
+            state.connections = state.connections.filter(
+                conn => conn.from !== index && conn.to !== index
+            );
+            
+            // Update indices for affected connections
+            state.connections = state.connections.map(conn => ({
+                ...conn,
+                from: conn.from > index ? conn.from - 1 : conn.from,
+                to: conn.to > index ? conn.to - 1 : conn.to
+            }));
+            
+            if (state.activeNodeIndex === index) {
+                state.activeNodeIndex = null;
+            } else if (state.activeNodeIndex > index) {
+                state.activeNodeIndex--;
+            }
+            
+            renderNodes();
+            renderConnections();
+            updateStats();
+        }
+
+        function deleteConnection(index) {
+            state.connections.splice(index, 1);
+            renderConnections();
+            updateStats();
+        }
+
+        function addNode() {
+            state.nodes.push({
+                id: `node-${Date.now()}`,
+                name: 'New Component',
+                type: 'container',
+                x: 100,
+                y: 100,
+                width: 150,
+                height: 50
+            });
+            
+            renderNodes();
+            updateStats();
+        }
+
+        function setViewMode(mode) {
+            state.viewMode = mode;
+            
+            if (mode === 'selection') {
+                moveBtn.classList.add('active');
+                connectBtn.classList.remove('active');
+            } else {
+                moveBtn.classList.remove('active');
+                connectBtn.classList.add('active');
+            }
+            
+            renderNodes();
+        }
+
+        // Event handlers
+        function handleMouseMove(e) {
+            const rect = canvas.getBoundingClientRect();
+            const newMousePosition = {
+                x: (e.clientX - rect.left - state.viewPosition.x) / state.blueprintScale,
+                y: (e.clientY - rect.top - state.viewPosition.y) / state.blueprintScale
+            };
+            
+            state.mousePosition = newMousePosition;
+            
+            // Update coordinates display
+            coordinates.textContent = `Blueprint Coordinates: x: ${Math.round(newMousePosition.x)}, y: ${Math.round(newMousePosition.y)}`;
+            
+            // Handle node dragging
+            if (state.draggedNodeIndex !== null) {
+                const node = state.nodes[state.draggedNodeIndex];
+                node.x = newMousePosition.x - (node.width || 100) / 2;
+                node.y = newMousePosition.y - (node.height || 40) / 2;
+                
+                renderNodes();
+                renderConnections();
+            }
+            
+            // Handle panning
+            if (state.isPanning) {
+                state.viewPosition = {
+                    x: state.viewPosition.x + (e.clientX - state.panStart.x),
+                    y: state.viewPosition.y + (e.clientY - state.panStart.y)
+                };
+                
+                state.panStart = {
+                    x: e.clientX,
+                    y: e.clientY
+                };
+                
+                updateTransform();
+            }
+            
+            // Update temp connection line
+            renderTempConnection();
+        }
+
+        function handleMouseDown(e) {
+            // Middle button or Alt+Left click for panning
+            if (e.button === 1 || (e.button === 0 && e.altKey)) {
+                e.preventDefault();
+                state.isPanning = true;
+                state.panStart = {
+                    x: e.clientX,
+                    y: e.clientY
+                };
+                return;
+            }
+            
+            // Left click
+            if (e.button === 0) {
+                // Check if clicking on a node
+                let target = e.target;
+                while (target !== canvas) {
+                    if (target.classList.contains('node')) {
+                        const index = parseInt(target.dataset.index);
+                        
+                        if (state.viewMode === 'selection') {
+                            selectNode(index);
+                            state.draggedNodeIndex = index;
+                        } else if (state.viewMode === 'connection') {
+                            state.connecting = true;
+                            state.connectionStartIndex = index;
+                        }
+                        return;
+                    } else if (target.classList.contains('node-delete')) {
+                        const index = parseInt(target.dataset.index);
+                        deleteNode(index);
+                        return;
+                    } else if (target.classList.contains('connection-delete')) {
+                        const index = parseInt(target.dataset.index);
+                        deleteConnection(index);
+                        return;
+                    } else if (target.classList.contains('connection-point')) {
+                        // Handle connection points if needed
+                    }
+                    
+                    target = target.parentNode;
+                }
+                
+                // If clicked on empty space, deselect current node
+                state.activeNodeIndex = null;
+                renderNodes();
+            }
+        }
+
+        function handleMouseUp(e) {
+            if (state.draggedNodeIndex !== null) {
+                state.draggedNodeIndex = null;
+            }
+            
+            if (state.isPanning) {
+                state.isPanning = false;
+            }
+            
+            if (state.connecting && state.connectionStartIndex !== null) {
+                // Check if mouse is over a node
+                let target = e.target;
+                while (target !== canvas) {
+                    if (target.classList.contains('node')) {
+                        const index = parseInt(target.dataset.index);
+                        
+                        if (index !== state.connectionStartIndex) {
+                            // Create a new connection
+                            state.connections.push({
+                                from: state.connectionStartIndex,
+                                to: index,
+                                id: `connection-${state.connectionStartIndex}-${index}-${Date.now()}`
+                            });
+                            
+                            renderConnections();
+                            updateStats();
+                        }
+                        
+                        state.connecting = false;
+                        state.connectionStartIndex = null;
+                        renderTempConnection();
+                        return;
+                    }
+                    
+                    target = target.parentNode;
+                }
+                
+                // If not over a node, cancel connection
+                state.connecting = false;
+                state.connectionStartIndex = null;
+                renderTempConnection();
+            }
+        }
+
+        function handleWheel(e) {
+            e.preventDefault();
+            
+            // Zoom in/out
+            const delta = e.deltaY < 0 ? 0.1 : -0.1;
+            state.blueprintScale = Math.max(0.5, Math.min(2, state.blueprintScale + delta));
+            
+            updateTransform();
+        }
+
+        // Event listeners
+        canvas.addEventListener('mousemove', handleMouseMove);
+        canvas.addEventListener('mousedown', handleMouseDown);
+        canvas.addEventListener('mouseup', handleMouseUp);
+        canvas.addEventListener('wheel', handleWheel);
+        
+        moveBtn.addEventListener('click', () => setViewMode('selection'));
+        connectBtn.addEventListener('click', () => setViewMode('connection'));
+        // Save button logic
+        document.getElementById('saveBtn').addEventListener('click', generateFlowSequence);
+        document.getElementById('closeResultBtn').addEventListener('click', () => {
+            document.getElementById('flowResult').style.display = 'none';
+        });
+        
+        resetZoomBtn.addEventListener('click', () => {
+            state.blueprintScale = 1;
+            updateTransform();
+        });
+
+        // Initialize
+        initializeData();
+        updateTransform();
+        
+        // Function to find all possible paths in the flow
+        function findPaths() {
+            // Create an adjacency list from the connections
+            const graph = {};
+            
+            // Initialize all nodes in the graph
+            state.nodes.forEach((node, index) => {
+                graph[index] = [];
+            });
+            
+            // Add connections to the graph
+            state.connections.forEach(conn => {
+                graph[conn.from].push(conn.to);
+            });
+            
+            // Find all starting points (nodes with no incoming connections)
+            const startNodes = [];
+            const hasIncoming = new Set();
+            
+            state.connections.forEach(conn => {
+                hasIncoming.add(conn.to);
+            });
+            
+            state.nodes.forEach((_, index) => {
+                if (!hasIncoming.has(index)) {
+                    startNodes.push(index);
+                }
+            });
+            
+            // DFS to find all paths
+            const allPaths = [];
+            
+            function dfs(node, path) {
+                // Add current node to path
+                path.push(node);
+                
+                // If node has no outgoing connections, path is complete
+                if (!graph[node] || graph[node].length === 0) {
+                    allPaths.push([...path]);
+                } else {
+                    // Continue DFS for each connection
+                    for (const nextNode of graph[node]) {
+                        // Avoid cycles
+                        if (!path.includes(nextNode)) {
+                            dfs(nextNode, [...path]);
+                        }
+                    }
+                }
+            }
+            
+            // Start DFS from each starting node
+            startNodes.forEach(startNode => {
+                dfs(startNode, []);
+            });
+            
+            return allPaths;
+        }
+        
+        // Function to generate the flow sequence and send to server
+        function generateFlowSequence() {
+            const paths = findPaths();
+            const flowResultElement = document.getElementById('flowSequence');
+            let result = "";
+            
+            // Create data object for sending to server
+            const flowData = {
+                paths: [],
+                connections: [],
+                timestamp: new Date().toISOString()
+            };
+            
+            if (paths.length === 0) {
+                result = "No complete paths found. Create connections between components to define user flows.";
+            } else {
+                result = "USER FLOW SEQUENCE:\n\n";
+                
+                paths.forEach((path, pathIndex) => {
+                    result += `Flow ${pathIndex + 1}:\n`;
+                    
+                    const pathData = {
+                        id: pathIndex + 1,
+                        steps: []
+                    };
+                    
+                    path.forEach((nodeIndex, stepIndex) => {
+                        const node = state.nodes[nodeIndex];
+                        result += `  ${stepIndex + 1}. ${node.name} (${node.type})`;
+                        
+                        // Add to data object
+                        pathData.steps.push({
+                            stepNumber: stepIndex + 1,
+                            nodeId: node.id,
+                            nodeName: node.name,
+                            nodeType: node.type
+                        });
+                        
+                        // Add arrow for connections
+                        if (stepIndex < path.length - 1) {
+                            result += " →\n";
+                        }
+                    });
+                    
+                    flowData.paths.push(pathData);
+                    result += "\n\n";
+                });
+                
+                // Add connection details
+                result += "CONNECTIONS:\n";
+                state.connections.forEach((conn, index) => {
+                    const fromNode = state.nodes[conn.from];
+                    const toNode = state.nodes[conn.to];
+                    result += `${index + 1}. ${fromNode.name} → ${toNode.name}\n`;
+                    
+                    // Add to data object
+                    flowData.connections.push({
+                        id: index + 1,
+                        fromNodeId: fromNode.id,
+                        fromNodeName: fromNode.name,
+                        toNodeId: toNode.id,
+                        toNodeName: toNode.name
+                    });
+                });
+                
+                flowResultElement.textContent = result;
+                
+                // Send data to server
+                sendFlowDataToServer(flowData, result);
+            }
+            
+            // Show the result element
+            document.getElementById('flowResult').style.display = 'block';
+        }
+        
+        // Function to send flow data to server
+        function sendFlowDataToServer(flowData, textRepresentation) {
+            // Create a form data object to send
+            const formData = new FormData();
+            
+            // Add the JSON data
+            formData.append('flowData', JSON.stringify(flowData));
+            
+            // Add the text representation
+            formData.append('textRepresentation', textRepresentation);
+            
+            // You can modify this URL to point to your actual endpoint
+            const endpoint = '/api/save-flow';
+            
+            // Send the data via fetch API
+            fetch(endpoint, {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => {
+                if (response.ok) {
+                    return response.json();
+                }
+                throw new Error('Network response was not ok.');
+            })
+            .then(data => {
+                console.log('Flow saved successfully:', data);
+                // You could add a success message to the UI here
+                const flowResultElement = document.getElementById('flowSequence');
+                flowResultElement.textContent += "\n\n✅ Flow saved to server successfully!";
+            })
+            .catch(error => {
+                console.error('Error saving flow:', error);
+                // You could add an error message to the UI here
+                const flowResultElement = document.getElementById('flowSequence');
+                flowResultElement.textContent += "\n\n❌ Failed to save flow to server. Check console for details.";
+            });
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,339 @@
+{
+  "userId": "67cf6a12d454ce786d5c246a",
+  "projectId": "67d33645f7d0bebb5ff14ecc",
+  "url": "http://localhost:8000/admin/Applications/",
+  "title": "Application Dashboard",
+  "meta": [
+    {
+      "name": null,
+      "content": null
+    },
+    {
+      "name": "viewport",
+      "content": "width=device-width, initial-scale=1.0"
+    }
+  ],
+  "elements": [
+    "HTML",
+    "HEAD",
+    "META",
+    "META",
+    "TITLE",
+    "LINK",
+    "LINK",
+    "LINK",
+    "LINK",
+    "STYLE",
+    "STYLE",
+    "STYLE",
+    "BODY",
+    "NAV",
+    "DIV",
+    "A",
+    "BUTTON",
+    "SPAN",
+    "DIV",
+    "UL",
+    "LI",
+    "A",
+    "LI",
+    "A",
+    "LI",
+    "A",
+    "DIV",
+    "DIV",
+    "H1",
+    "DIV",
+    "BUTTON",
+    "I",
+    "A",
+    "DIV",
+    "STRONG",
+    "BUTTON",
+    "DIV",
+    "DIV",
+    "H3",
+    "BUTTON",
+    "I",
+    "DIV",
+    "DIV",
+    "DIV",
+    "P",
+    "STRONG",
+    "P",
+    "STRONG",
+    "P",
+    "STRONG",
+    "SPAN",
+    "DIV",
+    "DIV",
+    "IMG",
+    "DIV",
+    "DIV",
+    "H3",
+    "DIV",
+    "DIV",
+    "TABLE",
+    "THEAD",
+    "TR",
+    "TH",
+    "TH",
+    "TH",
+    "TH",
+    "TH",
+    "TH",
+    "TBODY",
+    "TR",
+    "TD",
+    "TD",
+    "TD",
+    "TD",
+    "SPAN",
+    "TD",
+    "TD",
+    "DIV",
+    "A",
+    "I",
+    "A",
+    "I",
+    "DIV",
+    "DIV",
+    "DIV",
+    "DIV",
+    "H5",
+    "BUTTON",
+    "DIV",
+    "FORM",
+    "INPUT",
+    "DIV",
+    "LABEL",
+    "SELECT",
+    "OPTION",
+    "OPTION",
+    "OPTION",
+    "DIV",
+    "I",
+    "DIV",
+    "BUTTON",
+    "BUTTON",
+    "DIV",
+    "DIV",
+    "DIV",
+    "DIV",
+    "H5",
+    "BUTTON",
+    "DIV",
+    "FORM",
+    "INPUT",
+    "DIV",
+    "DIV",
+    "IMG",
+    "LABEL",
+    "INPUT",
+    "DIV",
+    "DIV",
+    "BUTTON",
+    "BUTTON",
+    "SCRIPT",
+    "SCRIPT",
+    "SCRIPT"
+  ],
+  "textContent": "WaterLoo\nDashboard\nApplication Approvals\nApplications\nApplication Management\n New Application Logout\nUser Information\n Manage Signature\n\nName: Singh, Amrinder\n\nEmail: asingh89@CougarNet.UH.EDU\n\nRole: superuser\n\nMy Applications\nApplication Name\tForm Type\tSubmission Date\tCurrent Status\tCurrent Approver\tActions\nFERPA Authorization - Singh, Amrinder\tFERPA Authorization\tMar 03, 2025\tApproved\tSingh, Amrinder\t",
+  "interactiveElements": [
+    {
+      "tag": "A",
+      "text": "WaterLoo",
+      "id": null,
+      "class": "navbar-brand"
+    },
+    {
+      "tag": "BUTTON",
+      "text": "\n                \n            ",
+      "id": null,
+      "class": "navbar-toggler"
+    },
+    {
+      "tag": "A",
+      "text": "Dashboard",
+      "id": null,
+      "class": "nav-link "
+    },
+    {
+      "tag": "A",
+      "text": "Application Approvals",
+      "id": null,
+      "class": "nav-link "
+    },
+    {
+      "tag": "A",
+      "text": "Applications",
+      "id": null,
+      "class": "nav-link active"
+    },
+    {
+      "tag": "BUTTON",
+      "text": " New Application",
+      "id": "checkSignatureBtn",
+      "class": "btn btn-success me-2"
+    },
+    {
+      "tag": "A",
+      "text": "Logout",
+      "id": null,
+      "class": "btn btn-danger"
+    },
+    {
+      "tag": "BUTTON",
+      "text": "",
+      "id": null,
+      "class": "btn-close"
+    },
+    {
+      "tag": "BUTTON",
+      "text": " Manage Signature",
+      "id": null,
+      "class": "btn btn-primary btn-sm"
+    },
+    {
+      "tag": "A",
+      "text": "",
+      "id": null,
+      "class": "btn btn-sm btn-outline-info"
+    },
+    {
+      "tag": "A",
+      "text": "",
+      "id": null,
+      "class": "btn btn-sm btn-outline-primary "
+    },
+    {
+      "tag": "BUTTON",
+      "text": "",
+      "id": null,
+      "class": "btn-close"
+    },
+    {
+      "tag": "FORM",
+      "text": "\n                        \n                        \n                            Form Type\n                            \n                                Select a form\n                                Authorization to Release Educational Records\n                                Texas Residency Affidavit\n                            \n                        \n                        \n                             Select a form type to continue. After submission, you'll be redirected to fill out the specific form details.\n                        \n                        \n                            Cancel\n                            Create Application\n                        \n                    ",
+      "id": null,
+      "class": null
+    },
+    {
+      "tag": "INPUT",
+      "text": "wHNvxYpwtH5O3SSnYVtRWSRkp4yoL7upZDkJbxkCNfECxL921oEl3oRxexDnspHy",
+      "id": null,
+      "class": null
+    },
+    {
+      "tag": "SELECT",
+      "text": "\n                                Select a form\n                                Authorization to Release Educational Records\n                                Texas Residency Affidavit\n                            ",
+      "id": "formType",
+      "class": "form-select"
+    },
+    {
+      "tag": "BUTTON",
+      "text": "Cancel",
+      "id": null,
+      "class": "btn btn-secondary"
+    },
+    {
+      "tag": "BUTTON",
+      "text": "Create Application",
+      "id": null,
+      "class": "btn btn-primary"
+    },
+    {
+      "tag": "BUTTON",
+      "text": "",
+      "id": null,
+      "class": "btn-close"
+    },
+    {
+      "tag": "FORM",
+      "text": "\n                        \n                        \n                            \n                                \n                                    \n                                \n                            \n                            Upload Signature Image\n                            \n                            Upload an image of your signature. PNG or JPG format recommended.\n                        \n                        \n                            Cancel\n                            Save Signature\n                        \n                    ",
+      "id": null,
+      "class": null
+    },
+    {
+      "tag": "INPUT",
+      "text": "wHNvxYpwtH5O3SSnYVtRWSRkp4yoL7upZDkJbxkCNfECxL921oEl3oRxexDnspHy",
+      "id": null,
+      "class": null
+    },
+    {
+      "tag": "INPUT",
+      "text": "",
+      "id": "id_signature_image",
+      "class": "form-control"
+    },
+    {
+      "tag": "BUTTON",
+      "text": "Cancel",
+      "id": null,
+      "class": "btn btn-secondary"
+    },
+    {
+      "tag": "BUTTON",
+      "text": "Save Signature",
+      "id": null,
+      "class": "btn btn-primary"
+    }
+  ],
+  "tables": [
+    {
+      "id": "table-0",
+      "caption": "",
+      "className": "table table-striped table-hover",
+      "headers": [
+        "Application Name",
+        "Form Type",
+        "Submission Date",
+        "Current Status",
+        "Current Approver",
+        "Actions"
+      ],
+      "rowCount": 1,
+      "columnCount": 6,
+      "sampleData": [
+        [
+          "FERPA Authorization - Singh, Amrinder",
+          "FERPA Authorization",
+          "Mar 03, 2025"
+        ]
+      ],
+      "emptyText": null
+    }
+  ],
+  "lists": [
+    {
+      "id": "list-0",
+      "type": "ul",
+      "className": "navbar-nav",
+      "itemCount": 3,
+      "items": [
+        {
+          "text": "Dashboard",
+          "hasLinks": true,
+          "hasButtons": false,
+          "className": "nav-item"
+        },
+        {
+          "text": "Application Approvals",
+          "hasLinks": true,
+          "hasButtons": false,
+          "className": "nav-item"
+        },
+        {
+          "text": "Applications",
+          "hasLinks": true,
+          "hasButtons": false,
+          "className": "nav-item"
+        }
+      ],
+      "hasMoreItems": false,
+      "title": "",
+      "context": ""
+    }
+  ],
+  "filename": "script-1741895237735.js"
+}

@@ -1,0 +1,466 @@
+{
+  "userId": "67cf6a12d454ce786d5c246a",
+  "projectId": "67d35cfb7ee68519932882b6",
+  "url": "http://localhost:3000/project/67d35cfb7ee68519932882b6",
+  "title": "SpringAI Project Dashboard",
+  "meta": [
+    {
+      "name": null,
+      "content": null
+    },
+    {
+      "name": "viewport",
+      "content": "width=device-width, initial-scale=1.0"
+    }
+  ],
+  "elements": [
+    "HTML",
+    "HEAD",
+    "META",
+    "META",
+    "TITLE",
+    "LINK",
+    "LINK",
+    "LINK",
+    "STYLE",
+    "BODY",
+    "DIV",
+    "DIV",
+    "DIV",
+    "DIV",
+    "H1",
+    "IMG",
+    "DIV",
+    "BUTTON",
+    "I",
+    "DIV",
+    "BUTTON",
+    "UL",
+    "LI",
+    "A",
+    "LI",
+    "A",
+    "LI",
+    "HR",
+    "LI",
+    "A",
+    "UL",
+    "LI",
+    "A",
+    "LI",
+    "A",
+    "LI",
+    "A",
+    "LI",
+    "A",
+    "DIV",
+    "DIV",
+    "DIV",
+    "H2",
+    "DIV",
+    "DIV",
+    "DIV",
+    "DIV",
+    "DIV",
+    "DIV",
+    "DIV",
+    "I",
+    "DIV",
+    "P",
+    "A",
+    "DIV",
+    "H2",
+    "P",
+    "STRONG",
+    "SPAN",
+    "P",
+    "STRONG",
+    "SPAN",
+    "DIV",
+    "BUTTON",
+    "I",
+    "DIV",
+    "DIV",
+    "DIV",
+    "H2",
+    "DIV",
+    "TABLE",
+    "THEAD",
+    "TR",
+    "TH",
+    "TH",
+    "TH",
+    "TH",
+    "TBODY",
+    "TR",
+    "TD",
+    "TD",
+    "SPAN",
+    "TD",
+    "SPAN",
+    "TD",
+    "A",
+    "I",
+    "TR",
+    "TD",
+    "TD",
+    "SPAN",
+    "TD",
+    "SPAN",
+    "TD",
+    "A",
+    "I",
+    "TR",
+    "TD",
+    "TD",
+    "SPAN",
+    "TD",
+    "SPAN",
+    "TD",
+    "A",
+    "I",
+    "TR",
+    "TD",
+    "TD",
+    "SPAN",
+    "TD",
+    "SPAN",
+    "TD",
+    "A",
+    "I",
+    "TR",
+    "TD",
+    "TD",
+    "SPAN",
+    "TD",
+    "SPAN",
+    "TD",
+    "A",
+    "I",
+    "TR",
+    "TD",
+    "TD",
+    "SPAN",
+    "TD",
+    "SPAN",
+    "TD",
+    "A",
+    "I",
+    "TR",
+    "TD",
+    "TD",
+    "SPAN",
+    "TD",
+    "SPAN",
+    "TD",
+    "A",
+    "I",
+    "TR",
+    "TD",
+    "TD",
+    "SPAN",
+    "TD",
+    "SPAN",
+    "TD",
+    "A",
+    "I",
+    "TR",
+    "TD",
+    "TD",
+    "SPAN",
+    "TD",
+    "SPAN",
+    "TD",
+    "A",
+    "I",
+    "DIV",
+    "P",
+    "DIV",
+    "H2",
+    "P",
+    "DIV",
+    "BUTTON",
+    "I",
+    "BUTTON",
+    "I",
+    "DIV",
+    "DIV",
+    "DIV",
+    "DIV",
+    "H5",
+    "I",
+    "BUTTON",
+    "DIV",
+    "P",
+    "CODE",
+    "DIV",
+    "PRE",
+    "CODE",
+    "BUTTON",
+    "I",
+    "DIV",
+    "BUTTON",
+    "SCRIPT",
+    "SCRIPT",
+    "SCRIPT"
+  ],
+  "textContent": "Project PROTOTYPE-ION\n Settings\nSA\nOverview\nPages\nData\nScript\nProject Overview\n\n9\nTracked Pages\nYour script is actively collecting data. View script details\nScript Information\n\nScript File: script-1741905147816.js\n\nCreated: 3/13/2025\n\n View Installation Code\nTracked Pages\nURL\tStatus\tScript\tActions\nhttp://localhost:3000/dashboard\tActive\tNot Generated\t View Details\nhttp://localhost:3000/dashboard#\tActive\tNot Generated\t View Details\nhttp://localhost:3000/project/67d33645f7d0bebb5ff14ecc\tActive\tNot Generated\t View Details\nhttp://localhost:3000/project/67d35cfb7ee68519932882b6\tActive\tGenerated\t View Details\nhttp://localhost:3000/project/67d35cfb7ee68519932882b6/page/67d35d507ee68519932882be\tActive\tNot Generated\t View Details\nhttp://localhost:3000/project/67d35cfb7ee68519932882b6/page/67d35d547ee68519932882c8\tActive\tNot Generated\t View Details\nhttp://localhost:3000/project/67d35cfb7ee68519932882b6/page/67d35dc87ee68519932882de\tActive\tNot Generated\t View Details\nhttp://localhost:3000/project/67d35cfb7ee68519932882b6/page/67d35ec87ee6851993288309\tActive\tNot Generated\t View Details\nhttp://localhost:3000/project/67d36d15362ecc291b565f87\tActive\tNot Generated\t View Details\nShowing all tracked pages\nData Preview\n\nThis is a summary of the most recent data collected from your tracked pages.\n\n Export Data\n View Analytics",
+  "interactiveElements": [
+    {
+      "tag": "BUTTON",
+      "text": " Settings",
+      "id": null,
+      "class": "btn btn-secondary me-3"
+    },
+    {
+      "tag": "BUTTON",
+      "text": "SA",
+      "id": "userDropdown",
+      "class": "btn btn-light rounded-circle d-flex align-items-center justify-content-center me-2"
+    },
+    {
+      "tag": "A",
+      "text": "Dashboard",
+      "id": null,
+      "class": "dropdown-item"
+    },
+    {
+      "tag": "A",
+      "text": "Account Settings",
+      "id": null,
+      "class": "dropdown-item"
+    },
+    {
+      "tag": "A",
+      "text": "Logout",
+      "id": null,
+      "class": "dropdown-item"
+    },
+    {
+      "tag": "A",
+      "text": "Overview",
+      "id": null,
+      "class": "nav-link active"
+    },
+    {
+      "tag": "A",
+      "text": "Pages",
+      "id": null,
+      "class": "nav-link"
+    },
+    {
+      "tag": "A",
+      "text": "Data",
+      "id": null,
+      "class": "nav-link"
+    },
+    {
+      "tag": "A",
+      "text": "Script",
+      "id": null,
+      "class": "nav-link"
+    },
+    {
+      "tag": "A",
+      "text": "View script details",
+      "id": null,
+      "class": "link-green"
+    },
+    {
+      "tag": "BUTTON",
+      "text": " View Installation Code",
+      "id": null,
+      "class": "btn btn-secondary"
+    },
+    {
+      "tag": "A",
+      "text": " View Details",
+      "id": null,
+      "class": "btn btn-sm btn-secondary"
+    },
+    {
+      "tag": "A",
+      "text": " View Details",
+      "id": null,
+      "class": "btn btn-sm btn-secondary"
+    },
+    {
+      "tag": "A",
+      "text": " View Details",
+      "id": null,
+      "class": "btn btn-sm btn-secondary"
+    },
+    {
+      "tag": "A",
+      "text": " View Details",
+      "id": null,
+      "class": "btn btn-sm btn-secondary"
+    },
+    {
+      "tag": "A",
+      "text": " View Details",
+      "id": null,
+      "class": "btn btn-sm btn-secondary"
+    },
+    {
+      "tag": "A",
+      "text": " View Details",
+      "id": null,
+      "class": "btn btn-sm btn-secondary"
+    },
+    {
+      "tag": "A",
+      "text": " View Details",
+      "id": null,
+      "class": "btn btn-sm btn-secondary"
+    },
+    {
+      "tag": "A",
+      "text": " View Details",
+      "id": null,
+      "class": "btn btn-sm btn-secondary"
+    },
+    {
+      "tag": "A",
+      "text": " View Details",
+      "id": null,
+      "class": "btn btn-sm btn-secondary"
+    },
+    {
+      "tag": "BUTTON",
+      "text": " Export Data",
+      "id": null,
+      "class": "btn btn-primary me-2"
+    },
+    {
+      "tag": "BUTTON",
+      "text": " View Analytics",
+      "id": null,
+      "class": "btn btn-secondary"
+    },
+    {
+      "tag": "BUTTON",
+      "text": "",
+      "id": null,
+      "class": "btn-close"
+    },
+    {
+      "tag": "BUTTON",
+      "text": "\n                            \n                        ",
+      "id": "copyBtn",
+      "class": "copy-btn position-absolute top-0 end-0 m-2 btn btn-sm btn-outline-secondary"
+    },
+    {
+      "tag": "BUTTON",
+      "text": "Close",
+      "id": null,
+      "class": "btn btn-secondary"
+    }
+  ],
+  "tables": [
+    {
+      "id": "table-0",
+      "caption": "",
+      "className": "table",
+      "headers": [
+        "URL",
+        "Status",
+        "Script",
+        "Actions"
+      ],
+      "rowCount": 9,
+      "columnCount": 4,
+      "sampleData": [
+        [
+          "http://localhost:3000/dashboard",
+          "Active",
+          "Not Generated"
+        ],
+        [
+          "http://localhost:3000/dashboard#",
+          "Active",
+          "Not Generated"
+        ],
+        [
+          "http://localhost:3000/project/67d33645f7d0bebb5ff14ecc",
+          "Active",
+          "Not Generated"
+        ]
+      ],
+      "emptyText": null
+    }
+  ],
+  "lists": [
+    {
+      "id": "list-0",
+      "type": "ul",
+      "className": "dropdown-menu dropdown-menu-end",
+      "itemCount": 4,
+      "items": [
+        {
+          "text": "Dashboard",
+          "hasLinks": true,
+          "hasButtons": false,
+          "className": ""
+        },
+        {
+          "text": "Account Settings",
+          "hasLinks": true,
+          "hasButtons": false,
+          "className": ""
+        },
+        {
+          "text": "",
+          "hasLinks": false,
+          "hasButtons": false,
+          "className": ""
+        },
+        {
+          "text": "Logout",
+          "hasLinks": true,
+          "hasButtons": false,
+          "className": ""
+        }
+      ],
+      "hasMoreItems": false,
+      "title": "",
+      "context": ""
+    },
+    {
+      "id": "list-1",
+      "type": "ul",
+      "className": "nav nav-tabs",
+      "itemCount": 4,
+      "items": [
+        {
+          "text": "Overview",
+          "hasLinks": true,
+          "hasButtons": false,
+          "className": "nav-item"
+        },
+        {
+          "text": "Pages",
+          "hasLinks": true,
+          "hasButtons": false,
+          "className": "nav-item"
+        },
+        {
+          "text": "Data",
+          "hasLinks": true,
+          "hasButtons": false,
+          "className": "nav-item"
+        },
+        {
+          "text": "Script",
+          "hasLinks": true,
+          "hasButtons": false,
+          "className": "nav-item"
+        }
+      ],
+      "hasMoreItems": false,
+      "title": "",
+      "context": ""
+    }
+  ],
+  "filename": "script-1741905147816.js"
+}
